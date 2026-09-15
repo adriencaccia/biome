@@ -238,7 +238,7 @@ $KeepParen: (KeepValue);
 
 $KeepUnary: -$Keep;
 
-$KeepNotParen: NOT($Keep AND $Other);
+$KeepNotParen: NOT ($Keep AND $Other);
 
 @for $I FROM 1 THROUGH 2 {
 	.KeepClass {

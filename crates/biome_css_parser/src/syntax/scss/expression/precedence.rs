@@ -6,7 +6,7 @@ use crate::syntax::value::dimension::is_at_any_dimension;
 use biome_css_syntax::CssSyntaxKind::{
     CSS_NUMBER_LITERAL, SCSS_BINARY_EXPRESSION, SCSS_UNARY_EXPRESSION,
 };
-use biome_css_syntax::{CssSyntaxKind, T};
+use biome_css_syntax::{CssSyntaxKind, T, decode_css_identifier};
 use biome_parser::prelude::ParsedSyntax;
 use biome_parser::prelude::ParsedSyntax::{Absent, Present};
 use biome_parser::{CompletedMarker, Parser, TokenSet, token_set};
@@ -110,7 +110,8 @@ fn parse_scss_unary_expression(p: &mut CssParser, options: ScssExpressionOptions
 #[inline]
 fn is_at_scss_unary_operator(p: &mut CssParser) -> bool {
     match p.cur() {
-        T![+] | T![not] => true,
+        T![+] => true,
+        T![not] => decode_css_identifier(p.cur_text()) == "not",
         // `var(--#{$name})` starts with `-`, but the pair belongs to one
         // custom-property identifier, not chained unary operators.
         T![-] => !is_at_scss_interpolated_dashed_identifier(p),
@@ -130,8 +131,10 @@ pub(super) fn scss_binary_precedence(p: &mut CssParser) -> Option<u8> {
     }
 
     Some(match p.cur() {
-        T![or] => 1,
-        T![and] => 2,
+        // Sass requires a literal lowercase initial for infix keywords, then
+        // matches the rest of the identifier without regard to case.
+        T![or] if p.cur_text().starts_with('o') => 1,
+        T![and] if p.cur_text().starts_with('a') => 2,
         T![==] | T![!=] => 3,
         T![<] | T![<=] | T![>] | T![>=] => 4,
         T![+] | T![-] => 5,
