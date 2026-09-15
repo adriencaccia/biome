@@ -40,34 +40,28 @@ CssRoot {
                 items: CssDeclarationOrRuleList [
                     CssDeclarationWithSemicolon {
                         declaration: CssDeclaration {
-                            property: CssBogusProperty {
-                                items: [
-                                    CssIdentifier {
-                                        value_token: IDENT@7..14 "font" [Newline("\n"), Whitespace("  ")] [],
-                                    },
-                                    COLON@14..16 ":" [] [Whitespace(" ")],
-                                    CssBogus {
-                                        items: [
-                                            CssBogus {
-                                                items: [
-                                                    CssIdentifier {
-                                                        value_token: IDENT@16..20 "bold" [] [],
-                                                    },
-                                                    CssIdentifier {
-                                                        value_token: IDENT@20..28 "width" [Newline("\n"), Whitespace("  ")] [],
-                                                    },
-                                                    CssBogusPropertyValue {
-                                                        items: [
-                                                            COLON@28..30 ":" [] [Whitespace(" ")],
-                                                            CSS_DIMENSION_VALUE@30..31 "1" [] [],
-                                                            PX_KW@31..33 "px" [] [],
-                                                        ],
-                                                    },
-                                                ],
-                                            },
-                                        ],
-                                    },
-                                ],
+                            property: CssGenericProperty {
+                                name: CssIdentifier {
+                                    value_token: IDENT@7..14 "font" [Newline("\n"), Whitespace("  ")] [],
+                                },
+                                colon_token: COLON@14..16 ":" [] [Whitespace(" ")],
+                                value: ScssExpression {
+                                    items: ScssExpressionItemList [
+                                        CssIdentifier {
+                                            value_token: IDENT@16..20 "bold" [] [],
+                                        },
+                                        CssIdentifier {
+                                            value_token: IDENT@20..28 "width" [Newline("\n"), Whitespace("  ")] [],
+                                        },
+                                        CssBogusPropertyValue {
+                                            items: [
+                                                COLON@28..30 ":" [] [Whitespace(" ")],
+                                                CSS_DIMENSION_VALUE@30..31 "1" [] [],
+                                                PX_KW@31..33 "px" [] [],
+                                            ],
+                                        },
+                                    ],
+                                },
                             },
                             important: missing (optional),
                         },
@@ -103,12 +97,12 @@ CssRoot {
         1: CSS_DECLARATION_OR_RULE_LIST@7..34
           0: CSS_DECLARATION_WITH_SEMICOLON@7..34
             0: CSS_DECLARATION@7..33
-              0: CSS_BOGUS_PROPERTY@7..33
+              0: CSS_GENERIC_PROPERTY@7..33
                 0: CSS_IDENTIFIER@7..14
                   0: IDENT@7..14 "font" [Newline("\n"), Whitespace("  ")] []
                 1: COLON@14..16 ":" [] [Whitespace(" ")]
-                2: CSS_BOGUS@16..33
-                  0: CSS_BOGUS@16..33
+                2: SCSS_EXPRESSION@16..33
+                  0: SCSS_EXPRESSION_ITEM_LIST@16..33
                     0: CSS_IDENTIFIER@16..20
                       0: IDENT@16..20 "bold" [] []
                     1: CSS_IDENTIFIER@20..28

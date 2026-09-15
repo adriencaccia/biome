@@ -17774,6 +17774,7 @@ impl AnyScssExpression {
 #[derive(Clone, PartialEq, Eq, Hash, Serialize)]
 pub enum AnyScssExpressionItem {
     AnyCssValue(AnyCssValue),
+    CssBogusPropertyValue(CssBogusPropertyValue),
     CssDeclarationImportant(CssDeclarationImportant),
     CssGenericDelimiter(CssGenericDelimiter),
     ScssArbitraryArgument(ScssArbitraryArgument),
@@ -17789,6 +17790,12 @@ impl AnyScssExpressionItem {
     pub fn as_any_css_value(&self) -> Option<&AnyCssValue> {
         match &self {
             Self::AnyCssValue(item) => Some(item),
+            _ => None,
+        }
+    }
+    pub fn as_css_bogus_property_value(&self) -> Option<&CssBogusPropertyValue> {
+        match &self {
+            Self::CssBogusPropertyValue(item) => Some(item),
             _ => None,
         }
     }
@@ -46033,6 +46040,11 @@ impl From<AnyScssExpression> for SyntaxElement {
         node.into()
     }
 }
+impl From<CssBogusPropertyValue> for AnyScssExpressionItem {
+    fn from(node: CssBogusPropertyValue) -> Self {
+        Self::CssBogusPropertyValue(node)
+    }
+}
 impl From<CssDeclarationImportant> for AnyScssExpressionItem {
     fn from(node: CssDeclarationImportant) -> Self {
         Self::CssDeclarationImportant(node)
@@ -46086,6 +46098,7 @@ impl From<ScssUnaryExpression> for AnyScssExpressionItem {
 impl AstNode for AnyScssExpressionItem {
     type Language = Language;
     const KIND_SET: SyntaxKindSet<Language> = AnyCssValue::KIND_SET
+        .union(CssBogusPropertyValue::KIND_SET)
         .union(CssDeclarationImportant::KIND_SET)
         .union(CssGenericDelimiter::KIND_SET)
         .union(ScssArbitraryArgument::KIND_SET)
@@ -46098,7 +46111,8 @@ impl AstNode for AnyScssExpressionItem {
         .union(ScssUnaryExpression::KIND_SET);
     fn can_cast(kind: SyntaxKind) -> bool {
         match kind {
-            CSS_DECLARATION_IMPORTANT
+            CSS_BOGUS_PROPERTY_VALUE
+            | CSS_DECLARATION_IMPORTANT
             | CSS_GENERIC_DELIMITER
             | SCSS_ARBITRARY_ARGUMENT
             | SCSS_BINARY_EXPRESSION
@@ -46114,6 +46128,9 @@ impl AstNode for AnyScssExpressionItem {
     }
     fn cast(syntax: SyntaxNode) -> Option<Self> {
         let res = match syntax.kind() {
+            CSS_BOGUS_PROPERTY_VALUE => {
+                Self::CssBogusPropertyValue(CssBogusPropertyValue { syntax })
+            }
             CSS_DECLARATION_IMPORTANT => {
                 Self::CssDeclarationImportant(CssDeclarationImportant { syntax })
             }
@@ -46141,6 +46158,7 @@ impl AstNode for AnyScssExpressionItem {
     }
     fn syntax(&self) -> &SyntaxNode {
         match self {
+            Self::CssBogusPropertyValue(it) => it.syntax(),
             Self::CssDeclarationImportant(it) => it.syntax(),
             Self::CssGenericDelimiter(it) => it.syntax(),
             Self::ScssArbitraryArgument(it) => it.syntax(),
@@ -46156,6 +46174,7 @@ impl AstNode for AnyScssExpressionItem {
     }
     fn into_syntax(self) -> SyntaxNode {
         match self {
+            Self::CssBogusPropertyValue(it) => it.into_syntax(),
             Self::CssDeclarationImportant(it) => it.into_syntax(),
             Self::CssGenericDelimiter(it) => it.into_syntax(),
             Self::ScssArbitraryArgument(it) => it.into_syntax(),
@@ -46174,6 +46193,7 @@ impl std::fmt::Debug for AnyScssExpressionItem {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
             Self::AnyCssValue(it) => std::fmt::Debug::fmt(it, f),
+            Self::CssBogusPropertyValue(it) => std::fmt::Debug::fmt(it, f),
             Self::CssDeclarationImportant(it) => std::fmt::Debug::fmt(it, f),
             Self::CssGenericDelimiter(it) => std::fmt::Debug::fmt(it, f),
             Self::ScssArbitraryArgument(it) => std::fmt::Debug::fmt(it, f),
@@ -46191,6 +46211,7 @@ impl From<AnyScssExpressionItem> for SyntaxNode {
     fn from(n: AnyScssExpressionItem) -> Self {
         match n {
             AnyScssExpressionItem::AnyCssValue(it) => it.into_syntax(),
+            AnyScssExpressionItem::CssBogusPropertyValue(it) => it.into_syntax(),
             AnyScssExpressionItem::CssDeclarationImportant(it) => it.into_syntax(),
             AnyScssExpressionItem::CssGenericDelimiter(it) => it.into_syntax(),
             AnyScssExpressionItem::ScssArbitraryArgument(it) => it.into_syntax(),

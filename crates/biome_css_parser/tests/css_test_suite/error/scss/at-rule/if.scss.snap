@@ -63,27 +63,23 @@ CssRoot {
             rule: CssBogusAtRule {
                 items: [
                     IF_KW@24..27 "if" [] [Whitespace(" ")],
-                    CssBogus {
-                        items: [
-                            CssBogus {
+                    ScssExpression {
+                        items: ScssExpressionItemList [
+                            ScssBinaryExpression {
+                                left: ScssVariable {
+                                    dollar_token: DOLLAR@27..28 "$" [] [],
+                                    name: CssIdentifier {
+                                        value_token: IDENT@28..34 "theme" [] [Whitespace(" ")],
+                                    },
+                                },
+                                operator: EQ2@34..37 "==" [] [Whitespace(" ")],
+                                right: CssIdentifier {
+                                    value_token: IDENT@37..41 "dark" [] [],
+                                },
+                            },
+                            CssBogusPropertyValue {
                                 items: [
-                                    ScssBinaryExpression {
-                                        left: ScssVariable {
-                                            dollar_token: DOLLAR@27..28 "$" [] [],
-                                            name: CssIdentifier {
-                                                value_token: IDENT@28..34 "theme" [] [Whitespace(" ")],
-                                            },
-                                        },
-                                        operator: EQ2@34..37 "==" [] [Whitespace(" ")],
-                                        right: CssIdentifier {
-                                            value_token: IDENT@37..41 "dark" [] [],
-                                        },
-                                    },
-                                    CssBogusPropertyValue {
-                                        items: [
-                                            SEMICOLON@41..42 ";" [] [],
-                                        ],
-                                    },
+                                    SEMICOLON@41..42 ";" [] [],
                                 ],
                             },
                         ],
@@ -180,8 +176,8 @@ CssRoot {
       0: AT@21..24 "@" [Newline("\n"), Newline("\n")] []
       1: CSS_BOGUS_AT_RULE@24..74
         0: IF_KW@24..27 "if" [] [Whitespace(" ")]
-        1: CSS_BOGUS@27..42
-          0: CSS_BOGUS@27..42
+        1: SCSS_EXPRESSION@27..42
+          0: SCSS_EXPRESSION_ITEM_LIST@27..42
             0: SCSS_BINARY_EXPRESSION@27..41
               0: SCSS_VARIABLE@27..34
                 0: DOLLAR@27..28 "$" [] []

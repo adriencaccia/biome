@@ -139,54 +139,40 @@ CssRoot {
                 declarator: CssMediaAtRuleDeclarator {
                     media_token: MEDIA_KW@103..109 "media" [] [Whitespace(" ")],
                     queries: CssMediaQueryList [
-                        CssBogusMediaQuery {
-                            items: [
-                                CssBogusMediaQuery {
-                                    items: [
-                                        CssBogus {
-                                            items: [
-                                                CssBogusSupportsCondition {
-                                                    items: [
-                                                        CssBogus {
+                        ScssMediaQuery {
+                            head: CssMediaTypeQuery {
+                                modifier: missing (optional),
+                                ty: CssMediaType {
+                                    value: ScssInterpolatedIdentifier {
+                                        items: ScssInterpolatedIdentifierPartList [
+                                            CssIdentifier {
+                                                value_token: IDENT@109..115 "print-" [] [],
+                                            },
+                                            ScssInterpolation {
+                                                hash_token: HASH@115..116 "#" [] [],
+                                                l_curly_token: L_CURLY@116..117 "{" [] [],
+                                                value: ScssExpression {
+                                                    items: ScssExpressionItemList [
+                                                        ScssVariable {
+                                                            dollar_token: DOLLAR@117..118 "$" [] [],
+                                                            name: CssIdentifier {
+                                                                value_token: IDENT@118..125 "suffix" [] [Whitespace(" ")],
+                                                            },
+                                                        },
+                                                        CssBogusPropertyValue {
                                                             items: [
-                                                                CssIdentifier {
-                                                                    value_token: IDENT@109..115 "print-" [] [],
-                                                                },
-                                                                CssBogus {
-                                                                    items: [
-                                                                        HASH@115..116 "#" [] [],
-                                                                        L_CURLY@116..117 "{" [] [],
-                                                                        CssBogus {
-                                                                            items: [
-                                                                                CssBogus {
-                                                                                    items: [
-                                                                                        ScssVariable {
-                                                                                            dollar_token: DOLLAR@117..118 "$" [] [],
-                                                                                            name: CssIdentifier {
-                                                                                                value_token: IDENT@118..125 "suffix" [] [Whitespace(" ")],
-                                                                                            },
-                                                                                        },
-                                                                                        CssBogusPropertyValue {
-                                                                                            items: [
-                                                                                                L_CURLY@125..126 "{" [] [],
-                                                                                            ],
-                                                                                        },
-                                                                                    ],
-                                                                                },
-                                                                            ],
-                                                                        },
-                                                                        R_CURLY@126..127 "}" [] [],
-                                                                    ],
-                                                                },
+                                                                L_CURLY@125..126 "{" [] [],
                                                             ],
                                                         },
                                                     ],
                                                 },
-                                            ],
-                                        },
-                                    ],
+                                                r_curly_token: R_CURLY@126..127 "}" [] [],
+                                            },
+                                        ],
+                                    },
                                 },
-                            ],
+                            },
+                            tail: missing (optional),
                         },
                     ],
                 },
@@ -284,18 +270,19 @@ CssRoot {
         0: CSS_MEDIA_AT_RULE_DECLARATOR@103..127
           0: MEDIA_KW@103..109 "media" [] [Whitespace(" ")]
           1: CSS_MEDIA_QUERY_LIST@109..127
-            0: CSS_BOGUS_MEDIA_QUERY@109..127
-              0: CSS_BOGUS_MEDIA_QUERY@109..127
-                0: CSS_BOGUS@109..127
-                  0: CSS_BOGUS_SUPPORTS_CONDITION@109..127
-                    0: CSS_BOGUS@109..127
+            0: SCSS_MEDIA_QUERY@109..127
+              0: CSS_MEDIA_TYPE_QUERY@109..127
+                0: (empty)
+                1: CSS_MEDIA_TYPE@109..127
+                  0: SCSS_INTERPOLATED_IDENTIFIER@109..127
+                    0: SCSS_INTERPOLATED_IDENTIFIER_PART_LIST@109..127
                       0: CSS_IDENTIFIER@109..115
                         0: IDENT@109..115 "print-" [] []
-                      1: CSS_BOGUS@115..127
+                      1: SCSS_INTERPOLATION@115..127
                         0: HASH@115..116 "#" [] []
                         1: L_CURLY@116..117 "{" [] []
-                        2: CSS_BOGUS@117..126
-                          0: CSS_BOGUS@117..126
+                        2: SCSS_EXPRESSION@117..126
+                          0: SCSS_EXPRESSION_ITEM_LIST@117..126
                             0: SCSS_VARIABLE@117..125
                               0: DOLLAR@117..118 "$" [] []
                               1: CSS_IDENTIFIER@118..125
@@ -303,6 +290,7 @@ CssRoot {
                             1: CSS_BOGUS_PROPERTY_VALUE@125..126
                               0: L_CURLY@125..126 "{" [] []
                         3: R_CURLY@126..127 "}" [] []
+              1: (empty)
         1: CSS_BOGUS_BLOCK@127..127
   2: EOF@127..128 "" [Newline("\n")] []
 

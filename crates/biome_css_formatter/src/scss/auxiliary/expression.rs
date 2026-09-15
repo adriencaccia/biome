@@ -1,8 +1,8 @@
 use crate::prelude::*;
 use crate::utils::scss_separator_comments::FormatScssSeparatorComments;
 use biome_css_syntax::{
-    CssParameterList, ScssExpression, ScssExpressionFields, is_in_scss_include_arguments,
-    single_expression_item,
+    CssBogusPropertyValue, CssParameterList, ScssExpression, ScssExpressionFields,
+    is_in_scss_include_arguments, single_expression_item,
 };
 use biome_formatter::{FormatResult, write};
 
@@ -29,6 +29,22 @@ impl FormatNodeRule<ScssExpression> for FormatScssExpression {
 
     fn fmt_fields(&self, node: &ScssExpression, f: &mut CssFormatter) -> FormatResult<()> {
         let ScssExpressionFields { items } = node.as_fields();
+
+        let has_enclosing_expression = node
+            .syntax()
+            .ancestors()
+            .skip(1)
+            .any(|ancestor| ScssExpression::can_cast(ancestor.kind()));
+
+        if !has_enclosing_expression
+            && items
+                .syntax()
+                .descendants()
+                .any(|descendant| CssBogusPropertyValue::can_cast(descendant.kind()))
+        {
+            // Recovery can split opaque syntax like `progid:...(...,...)` into list items.
+            return write!(f, [format_bogus_node(items.syntax())]);
+        }
 
         write!(f, [items.format()])
     }

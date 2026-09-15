@@ -3388,6 +3388,7 @@ AnyScssExpressionItem =
 	AnyCssValue
 	| CssGenericDelimiter
 	| CssDeclarationImportant
+	| CssBogusPropertyValue
 	| ScssKeywordArgument
 	| ScssArbitraryArgument
 	| ScssBinaryExpression

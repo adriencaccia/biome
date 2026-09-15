@@ -1,0 +1,50 @@
+---
+source: crates/biome_formatter_test/src/snapshot_builder.rs
+info: scss/expression/parity-core-list-operands-recovery-formatting.scss
+---
+
+# Input
+
+```scss
+.opaque-filter{filter:progid:DXImageTransform.Microsoft.gradient(enabled='false',startColorstr='#fff',endColorstr='#000');filter:progid:DXImageTransform.Microsoft.Shadow(color='#042b47',Direction=45,Strength=6) progid:DXImageTransform.Microsoft.Shadow(color='#042b47',Direction=135,Strength=6);color:red;}
+
+.filter-comments{filter:/* before */progid:DXImageTransform.Microsoft.gradient(startColorstr='#fff',/* between */endColorstr='#000')/* after */;width:calc(1px  +  2px);}
+
+.suppressed-filter{
+// biome-ignore format: preserve opaque filter spacing
+filter:   progid:DXImageTransform.Microsoft.Shadow(color='#042b47',Direction=45,Strength=6);
+color: red;
+}
+
+```
+
+
+# Formatted
+
+```scss
+.opaque-filter {
+	filter: progid:DXImageTransform.Microsoft.gradient(enabled='false',startColorstr='#fff',endColorstr='#000');
+	filter: progid:DXImageTransform.Microsoft.Shadow(color='#042b47',Direction=45,Strength=6) progid:DXImageTransform.Microsoft.Shadow(color='#042b47',Direction=135,Strength=6);
+	color: red;
+}
+
+.filter-comments {
+	filter:/* before */ progid:DXImageTransform.Microsoft.gradient(startColorstr='#fff',/* between */endColorstr='#000') /* after */;
+	width: calc(1px + 2px);
+}
+
+.suppressed-filter {
+	// biome-ignore format: preserve opaque filter spacing
+	filter:   progid:DXImageTransform.Microsoft.Shadow(color='#042b47',Direction=45,Strength=6);
+	color: red;
+}
+
+```
+
+# Lines exceeding max width of 80 characters
+```
+    2: 	filter: progid:DXImageTransform.Microsoft.gradient(enabled='false',startColorstr='#fff',endColorstr='#000');
+    3: 	filter: progid:DXImageTransform.Microsoft.Shadow(color='#042b47',Direction=45,Strength=6) progid:DXImageTransform.Microsoft.Shadow(color='#042b47',Direction=135,Strength=6);
+    8: 	filter:/* before */ progid:DXImageTransform.Microsoft.gradient(startColorstr='#fff',/* between */endColorstr='#000') /* after */;
+   14: 	filter:   progid:DXImageTransform.Microsoft.Shadow(color='#042b47',Direction=45,Strength=6);
+```

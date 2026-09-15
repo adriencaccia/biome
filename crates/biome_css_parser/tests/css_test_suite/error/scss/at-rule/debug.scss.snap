@@ -50,34 +50,28 @@ CssRoot {
                 items: CssDeclarationOrRuleList [
                     CssAtRule {
                         at_token: AT@15..19 "@" [Newline("\n"), Whitespace("  ")] [],
-                        rule: CssBogusAtRule {
-                            items: [
-                                DEBUG_KW@19..25 "debug" [] [Whitespace(" ")],
-                                CssBogus {
-                                    items: [
-                                        CssBogus {
-                                            items: [
-                                                ScssVariable {
-                                                    dollar_token: DOLLAR@25..26 "$" [] [],
-                                                    name: CssIdentifier {
-                                                        value_token: IDENT@26..31 "value" [] [],
-                                                    },
-                                                },
-                                                CssIdentifier {
-                                                    value_token: IDENT@31..39 "color" [Newline("\n"), Whitespace("  ")] [],
-                                                },
-                                                CssBogusPropertyValue {
-                                                    items: [
-                                                        COLON@39..41 ":" [] [Whitespace(" ")],
-                                                        IDENT@41..44 "red" [] [],
-                                                    ],
-                                                },
-                                            ],
+                        rule: ScssDebugAtRule {
+                            debug_token: DEBUG_KW@19..25 "debug" [] [Whitespace(" ")],
+                            value: ScssExpression {
+                                items: ScssExpressionItemList [
+                                    ScssVariable {
+                                        dollar_token: DOLLAR@25..26 "$" [] [],
+                                        name: CssIdentifier {
+                                            value_token: IDENT@26..31 "value" [] [],
                                         },
-                                    ],
-                                },
-                                SEMICOLON@44..45 ";" [] [],
-                            ],
+                                    },
+                                    CssIdentifier {
+                                        value_token: IDENT@31..39 "color" [Newline("\n"), Whitespace("  ")] [],
+                                    },
+                                    CssBogusPropertyValue {
+                                        items: [
+                                            COLON@39..41 ":" [] [Whitespace(" ")],
+                                            IDENT@41..44 "red" [] [],
+                                        ],
+                                    },
+                                ],
+                            },
+                            semicolon_token: SEMICOLON@44..45 ";" [] [],
                         },
                     },
                 ],
@@ -116,10 +110,10 @@ CssRoot {
         1: CSS_DECLARATION_OR_RULE_LIST@15..45
           0: CSS_AT_RULE@15..45
             0: AT@15..19 "@" [Newline("\n"), Whitespace("  ")] []
-            1: CSS_BOGUS_AT_RULE@19..45
+            1: SCSS_DEBUG_AT_RULE@19..45
               0: DEBUG_KW@19..25 "debug" [] [Whitespace(" ")]
-              1: CSS_BOGUS@25..44
-                0: CSS_BOGUS@25..44
+              1: SCSS_EXPRESSION@25..44
+                0: SCSS_EXPRESSION_ITEM_LIST@25..44
                   0: SCSS_VARIABLE@25..31
                     0: DOLLAR@25..26 "$" [] []
                     1: CSS_IDENTIFIER@26..31

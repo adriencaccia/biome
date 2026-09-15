@@ -23,61 +23,48 @@ CssRoot {
                     nesting_selectors: CssNestedSelectorList [],
                     simple_selector: missing (optional),
                     sub_selectors: CssSubSelectorList [
-                        CssBogusSubSelector {
-                            items: [
-                                L_BRACK@0..1 "[" [] [],
-                                CssAttributeName {
-                                    namespace: missing (optional),
-                                    name: CssIdentifier {
-                                        value_token: IDENT@1..6 "title" [] [],
+                        CssAttributeSelector {
+                            l_brack_token: L_BRACK@0..1 "[" [] [],
+                            name: CssAttributeName {
+                                namespace: missing (optional),
+                                name: CssIdentifier {
+                                    value_token: IDENT@1..6 "title" [] [],
+                                },
+                            },
+                            matcher: CssAttributeMatcher {
+                                operator: EQ@6..7 "=" [] [],
+                                value: CssAttributeMatcherValue {
+                                    name: CssString {
+                                        value_token: CSS_STRING_LITERAL@7..11 "\"x\"" [] [Whitespace(" ")],
                                     },
                                 },
-                                CssBogus {
-                                    items: [
-                                        EQ@6..7 "=" [] [],
-                                        CssAttributeMatcherValue {
-                                            name: CssString {
-                                                value_token: CSS_STRING_LITERAL@7..11 "\"x\"" [] [Whitespace(" ")],
-                                            },
-                                        },
-                                        CssBogusSupportsCondition {
-                                            items: [
-                                                CssBogus {
-                                                    items: [
-                                                        CssBogus {
-                                                            items: [
-                                                                HASH@11..12 "#" [] [],
-                                                                L_CURLY@12..13 "{" [] [],
-                                                                CssBogus {
-                                                                    items: [
-                                                                        CssBogus {
-                                                                            items: [
-                                                                                ScssVariable {
-                                                                                    dollar_token: DOLLAR@13..14 "$" [] [],
-                                                                                    name: CssIdentifier {
-                                                                                        value_token: IDENT@14..17 "mod" [] [],
-                                                                                    },
-                                                                                },
-                                                                                CssBogusPropertyValue {
-                                                                                    items: [
-                                                                                        R_BRACK@17..19 "]" [] [Whitespace(" ")],
-                                                                                        L_CURLY@19..20 "{" [] [],
-                                                                                    ],
-                                                                                },
-                                                                            ],
-                                                                        },
-                                                                    ],
-                                                                },
-                                                                R_CURLY@20..21 "}" [] [],
-                                                            ],
+                                modifier: ScssInterpolatedIdentifier {
+                                    items: ScssInterpolatedIdentifierPartList [
+                                        ScssInterpolation {
+                                            hash_token: HASH@11..12 "#" [] [],
+                                            l_curly_token: L_CURLY@12..13 "{" [] [],
+                                            value: ScssExpression {
+                                                items: ScssExpressionItemList [
+                                                    ScssVariable {
+                                                        dollar_token: DOLLAR@13..14 "$" [] [],
+                                                        name: CssIdentifier {
+                                                            value_token: IDENT@14..17 "mod" [] [],
                                                         },
-                                                    ],
-                                                },
-                                            ],
+                                                    },
+                                                    CssBogusPropertyValue {
+                                                        items: [
+                                                            R_BRACK@17..19 "]" [] [Whitespace(" ")],
+                                                            L_CURLY@19..20 "{" [] [],
+                                                        ],
+                                                    },
+                                                ],
+                                            },
+                                            r_curly_token: R_CURLY@20..21 "}" [] [],
                                         },
                                     ],
                                 },
-                            ],
+                            },
+                            r_brack_token: missing (required),
                         },
                     ],
                 },
@@ -103,24 +90,24 @@ CssRoot {
           0: CSS_NESTED_SELECTOR_LIST@0..0
           1: (empty)
           2: CSS_SUB_SELECTOR_LIST@0..21
-            0: CSS_BOGUS_SUB_SELECTOR@0..21
+            0: CSS_ATTRIBUTE_SELECTOR@0..21
               0: L_BRACK@0..1 "[" [] []
               1: CSS_ATTRIBUTE_NAME@1..6
                 0: (empty)
                 1: CSS_IDENTIFIER@1..6
                   0: IDENT@1..6 "title" [] []
-              2: CSS_BOGUS@6..21
+              2: CSS_ATTRIBUTE_MATCHER@6..21
                 0: EQ@6..7 "=" [] []
                 1: CSS_ATTRIBUTE_MATCHER_VALUE@7..11
                   0: CSS_STRING@7..11
                     0: CSS_STRING_LITERAL@7..11 "\"x\"" [] [Whitespace(" ")]
-                2: CSS_BOGUS_SUPPORTS_CONDITION@11..21
-                  0: CSS_BOGUS@11..21
-                    0: CSS_BOGUS@11..21
+                2: SCSS_INTERPOLATED_IDENTIFIER@11..21
+                  0: SCSS_INTERPOLATED_IDENTIFIER_PART_LIST@11..21
+                    0: SCSS_INTERPOLATION@11..21
                       0: HASH@11..12 "#" [] []
                       1: L_CURLY@12..13 "{" [] []
-                      2: CSS_BOGUS@13..20
-                        0: CSS_BOGUS@13..20
+                      2: SCSS_EXPRESSION@13..20
+                        0: SCSS_EXPRESSION_ITEM_LIST@13..20
                           0: SCSS_VARIABLE@13..17
                             0: DOLLAR@13..14 "$" [] []
                             1: CSS_IDENTIFIER@14..17
@@ -129,6 +116,7 @@ CssRoot {
                             0: R_BRACK@17..19 "]" [] [Whitespace(" ")]
                             1: L_CURLY@19..20 "{" [] []
                       3: R_CURLY@20..21 "}" [] []
+              3: (empty)
       1: CSS_BOGUS_BLOCK@21..21
   2: EOF@21..22 "" [Newline("\n")] []
 

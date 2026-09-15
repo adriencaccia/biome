@@ -136,63 +136,49 @@ CssRoot {
                         },
                     },
                     sub_selectors: CssSubSelectorList [
-                        CssBogusSubSelector {
-                            items: [
-                                L_BRACK@49..50 "[" [] [],
-                                CssAttributeName {
-                                    namespace: missing (optional),
-                                    name: CssIdentifier {
-                                        value_token: IDENT@50..54 "lang" [] [],
-                                    },
+                        CssAttributeSelector {
+                            l_brack_token: L_BRACK@49..50 "[" [] [],
+                            name: CssAttributeName {
+                                namespace: missing (optional),
+                                name: CssIdentifier {
+                                    value_token: IDENT@50..54 "lang" [] [],
                                 },
-                                CssBogus {
-                                    items: [
-                                        EQ@54..55 "=" [] [],
-                                        CssBogus {
-                                            items: [
-                                                CssBogusSupportsCondition {
-                                                    items: [
-                                                        CssBogus {
+                            },
+                            matcher: CssAttributeMatcher {
+                                operator: EQ@54..55 "=" [] [],
+                                value: CssAttributeMatcherValue {
+                                    name: ScssInterpolatedIdentifier {
+                                        items: ScssInterpolatedIdentifierPartList [
+                                            CssIdentifier {
+                                                value_token: IDENT@55..62 "prefix-" [] [],
+                                            },
+                                            ScssInterpolation {
+                                                hash_token: HASH@62..63 "#" [] [],
+                                                l_curly_token: L_CURLY@63..64 "{" [] [],
+                                                value: ScssExpression {
+                                                    items: ScssExpressionItemList [
+                                                        ScssVariable {
+                                                            dollar_token: DOLLAR@64..65 "$" [] [],
+                                                            name: CssIdentifier {
+                                                                value_token: IDENT@65..72 "locale" [] [Whitespace(" ")],
+                                                            },
+                                                        },
+                                                        CssBogusPropertyValue {
                                                             items: [
-                                                                CssIdentifier {
-                                                                    value_token: IDENT@55..62 "prefix-" [] [],
-                                                                },
-                                                                CssBogus {
-                                                                    items: [
-                                                                        HASH@62..63 "#" [] [],
-                                                                        L_CURLY@63..64 "{" [] [],
-                                                                        CssBogus {
-                                                                            items: [
-                                                                                CssBogus {
-                                                                                    items: [
-                                                                                        ScssVariable {
-                                                                                            dollar_token: DOLLAR@64..65 "$" [] [],
-                                                                                            name: CssIdentifier {
-                                                                                                value_token: IDENT@65..72 "locale" [] [Whitespace(" ")],
-                                                                                            },
-                                                                                        },
-                                                                                        CssBogusPropertyValue {
-                                                                                            items: [
-                                                                                                R_BRACK@72..74 "]" [] [Whitespace(" ")],
-                                                                                                L_CURLY@74..75 "{" [] [],
-                                                                                            ],
-                                                                                        },
-                                                                                    ],
-                                                                                },
-                                                                            ],
-                                                                        },
-                                                                        R_CURLY@75..76 "}" [] [],
-                                                                    ],
-                                                                },
+                                                                R_BRACK@72..74 "]" [] [Whitespace(" ")],
+                                                                L_CURLY@74..75 "{" [] [],
                                                             ],
                                                         },
                                                     ],
                                                 },
-                                            ],
-                                        },
-                                    ],
+                                                r_curly_token: R_CURLY@75..76 "}" [] [],
+                                            },
+                                        ],
+                                    },
                                 },
-                            ],
+                                modifier: missing (optional),
+                            },
+                            r_brack_token: missing (required),
                         },
                     ],
                 },
@@ -287,24 +273,24 @@ CssRoot {
             1: CSS_IDENTIFIER@43..49
               0: IDENT@43..49 "html" [Newline("\n"), Newline("\n")] []
           2: CSS_SUB_SELECTOR_LIST@49..76
-            0: CSS_BOGUS_SUB_SELECTOR@49..76
+            0: CSS_ATTRIBUTE_SELECTOR@49..76
               0: L_BRACK@49..50 "[" [] []
               1: CSS_ATTRIBUTE_NAME@50..54
                 0: (empty)
                 1: CSS_IDENTIFIER@50..54
                   0: IDENT@50..54 "lang" [] []
-              2: CSS_BOGUS@54..76
+              2: CSS_ATTRIBUTE_MATCHER@54..76
                 0: EQ@54..55 "=" [] []
-                1: CSS_BOGUS@55..76
-                  0: CSS_BOGUS_SUPPORTS_CONDITION@55..76
-                    0: CSS_BOGUS@55..76
+                1: CSS_ATTRIBUTE_MATCHER_VALUE@55..76
+                  0: SCSS_INTERPOLATED_IDENTIFIER@55..76
+                    0: SCSS_INTERPOLATED_IDENTIFIER_PART_LIST@55..76
                       0: CSS_IDENTIFIER@55..62
                         0: IDENT@55..62 "prefix-" [] []
-                      1: CSS_BOGUS@62..76
+                      1: SCSS_INTERPOLATION@62..76
                         0: HASH@62..63 "#" [] []
                         1: L_CURLY@63..64 "{" [] []
-                        2: CSS_BOGUS@64..75
-                          0: CSS_BOGUS@64..75
+                        2: SCSS_EXPRESSION@64..75
+                          0: SCSS_EXPRESSION_ITEM_LIST@64..75
                             0: SCSS_VARIABLE@64..72
                               0: DOLLAR@64..65 "$" [] []
                               1: CSS_IDENTIFIER@65..72
@@ -313,6 +299,8 @@ CssRoot {
                               0: R_BRACK@72..74 "]" [] [Whitespace(" ")]
                               1: L_CURLY@74..75 "{" [] []
                         3: R_CURLY@75..76 "}" [] []
+                2: (empty)
+              3: (empty)
       1: CSS_BOGUS_BLOCK@76..76
   2: EOF@76..77 "" [Newline("\n")] []
 
