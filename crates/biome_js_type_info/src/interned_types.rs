@@ -2737,6 +2737,19 @@ impl<'db> MappedTypeKeys<'db> {
             Self::Keyof(ty) | Self::Type(ty) => ty,
         }
     }
+
+    /// Returns whether these keys cannot be enumerated whatever substitutions
+    /// are applied first.
+    ///
+    /// Indexing with a literal, as in `[K in T[0]]` or `[K in keyof T["key"]]`,
+    /// normalizes to unknown, so the mapped type cannot be evaluated.
+    pub fn are_never_enumerable(self, db: &'db dyn TypeDb) -> bool {
+        matches!(
+            self.ty(),
+            TypeData::IndexedAccess(access)
+                if crate::type_operations::is_unsupported_index(access.index(db))
+        )
+    }
 }
 
 #[salsa::interned]

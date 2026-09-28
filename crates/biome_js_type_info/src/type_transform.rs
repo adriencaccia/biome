@@ -7,7 +7,7 @@
 
 use crate::TypeOperator;
 use crate::interned_types::{TypeData, TypeDataSlotRebuilder, TypeDb};
-use crate::type_operations::{indexed_access, keyof, mapped_type};
+use crate::type_operations::{indexed_access, is_unsupported_index, keyof, mapped_type};
 use rustc_hash::FxHashSet;
 
 pub(crate) const MAX_TYPE_SUBSTITUTION_STEPS: usize = 1024;
@@ -419,6 +419,12 @@ where
             && value.ty(db) == TypeData::Unknown
         {
             TypeTransformAction::Replace(ty)
+        } else if let TypeData::IndexedAccess(access) = ty
+            && is_unsupported_index(access.index(db))
+        {
+            // The access normalizes to unknown in `leave` whatever its object
+            // is, so the object, which can be large, is not normalized.
+            TypeTransformAction::Replace(TypeData::Unknown)
         } else {
             TypeTransformAction::Descend(ty)
         }

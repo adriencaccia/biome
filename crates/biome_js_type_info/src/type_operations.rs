@@ -234,6 +234,14 @@ fn property_value_type<'db>(db: &'db dyn TypeDb, member: &TypeMember<'db>) -> Ty
     }
 }
 
+/// Returns whether [`indexed_access`] fails for `index` whatever the object is.
+///
+/// A literal index, as in `T[0]` or `T["key"]`, is never `number`, and a
+/// substitution cannot change it.
+pub(crate) fn is_unsupported_index(index: TypeData<'_>) -> bool {
+    matches!(index, TypeData::Literal(_))
+}
+
 /// Combines the possible element types selected by `T[number]`.
 ///
 /// For example, indexing this const tuple produces `"A" | "B" | "C"`:
