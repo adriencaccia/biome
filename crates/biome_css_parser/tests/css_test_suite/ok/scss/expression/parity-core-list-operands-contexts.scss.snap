@@ -25,6 +25,12 @@ $gap: 8px;
 @function negated() { @return not false; } @function compared() { @return 1 < 2; }
 .case-return-operands { minus:minus(); plus:plus(); negated:negated(); comparison:compared(); }
 
+$gap: 8px; $x:(minus:-$gap, plus:+$gap, negated:not false, comparison:1 < 2);
+.case-map-value-operands { minus:map.get($x, minus); plus:map.get($x, plus); negated:map.get($x, negated); comparison:map.get($x, comparison); }
+
+$gap: 8px;
+.case-interpolation-operands { minus:#{-$gap}; plus:#{+$gap}; negated:#{not false}; comparison:#{1 < 2}; }
+
 ```
 
 
@@ -1079,17 +1085,541 @@ CssRoot {
                 r_curly_token: R_CURLY@790..791 "}" [] [],
             },
         },
+        ScssVariableDeclaration {
+            name: ScssVariable {
+                dollar_token: DOLLAR@791..794 "$" [Newline("\n"), Newline("\n")] [],
+                name: CssIdentifier {
+                    value_token: IDENT@794..797 "gap" [] [],
+                },
+            },
+            colon_token: COLON@797..799 ":" [] [Whitespace(" ")],
+            value: ScssExpression {
+                items: ScssExpressionItemList [
+                    CssRegularDimension {
+                        value_token: CSS_NUMBER_LITERAL@799..800 "8" [] [],
+                        unit_token: IDENT@800..802 "px" [] [],
+                    },
+                ],
+            },
+            modifiers: ScssVariableModifierList [],
+            semicolon_token: SEMICOLON@802..804 ";" [] [Whitespace(" ")],
+        },
+        ScssVariableDeclaration {
+            name: ScssVariable {
+                dollar_token: DOLLAR@804..805 "$" [] [],
+                name: CssIdentifier {
+                    value_token: IDENT@805..806 "x" [] [],
+                },
+            },
+            colon_token: COLON@806..807 ":" [] [],
+            value: ScssExpression {
+                items: ScssExpressionItemList [
+                    ScssMapExpression {
+                        l_paren_token: L_PAREN@807..808 "(" [] [],
+                        pairs: ScssMapExpressionPairList [
+                            ScssMapExpressionPair {
+                                key: ScssExpression {
+                                    items: ScssExpressionItemList [
+                                        CssIdentifier {
+                                            value_token: IDENT@808..813 "minus" [] [],
+                                        },
+                                    ],
+                                },
+                                colon_token: COLON@813..814 ":" [] [],
+                                value: ScssExpression {
+                                    items: ScssExpressionItemList [
+                                        ScssUnaryExpression {
+                                            operator: MINUS@814..815 "-" [] [],
+                                            expression: ScssVariable {
+                                                dollar_token: DOLLAR@815..816 "$" [] [],
+                                                name: CssIdentifier {
+                                                    value_token: IDENT@816..819 "gap" [] [],
+                                                },
+                                            },
+                                        },
+                                    ],
+                                },
+                            },
+                            COMMA@819..821 "," [] [Whitespace(" ")],
+                            ScssMapExpressionPair {
+                                key: ScssExpression {
+                                    items: ScssExpressionItemList [
+                                        CssIdentifier {
+                                            value_token: IDENT@821..825 "plus" [] [],
+                                        },
+                                    ],
+                                },
+                                colon_token: COLON@825..826 ":" [] [],
+                                value: ScssExpression {
+                                    items: ScssExpressionItemList [
+                                        ScssUnaryExpression {
+                                            operator: PLUS@826..827 "+" [] [],
+                                            expression: ScssVariable {
+                                                dollar_token: DOLLAR@827..828 "$" [] [],
+                                                name: CssIdentifier {
+                                                    value_token: IDENT@828..831 "gap" [] [],
+                                                },
+                                            },
+                                        },
+                                    ],
+                                },
+                            },
+                            COMMA@831..833 "," [] [Whitespace(" ")],
+                            ScssMapExpressionPair {
+                                key: ScssExpression {
+                                    items: ScssExpressionItemList [
+                                        CssIdentifier {
+                                            value_token: IDENT@833..840 "negated" [] [],
+                                        },
+                                    ],
+                                },
+                                colon_token: COLON@840..841 ":" [] [],
+                                value: ScssExpression {
+                                    items: ScssExpressionItemList [
+                                        ScssUnaryExpression {
+                                            operator: NOT_KW@841..845 "not" [] [Whitespace(" ")],
+                                            expression: CssIdentifier {
+                                                value_token: IDENT@845..850 "false" [] [],
+                                            },
+                                        },
+                                    ],
+                                },
+                            },
+                            COMMA@850..852 "," [] [Whitespace(" ")],
+                            ScssMapExpressionPair {
+                                key: ScssExpression {
+                                    items: ScssExpressionItemList [
+                                        CssIdentifier {
+                                            value_token: IDENT@852..862 "comparison" [] [],
+                                        },
+                                    ],
+                                },
+                                colon_token: COLON@862..863 ":" [] [],
+                                value: ScssExpression {
+                                    items: ScssExpressionItemList [
+                                        ScssBinaryExpression {
+                                            left: CssNumber {
+                                                value_token: CSS_NUMBER_LITERAL@863..865 "1" [] [Whitespace(" ")],
+                                            },
+                                            operator: L_ANGLE@865..867 "<" [] [Whitespace(" ")],
+                                            right: CssNumber {
+                                                value_token: CSS_NUMBER_LITERAL@867..868 "2" [] [],
+                                            },
+                                        },
+                                    ],
+                                },
+                            },
+                        ],
+                        r_paren_token: R_PAREN@868..869 ")" [] [],
+                    },
+                ],
+            },
+            modifiers: ScssVariableModifierList [],
+            semicolon_token: SEMICOLON@869..870 ";" [] [],
+        },
+        CssQualifiedRule {
+            prelude: CssSelectorList [
+                CssCompoundSelector {
+                    nesting_selectors: CssNestedSelectorList [],
+                    simple_selector: missing (optional),
+                    sub_selectors: CssSubSelectorList [
+                        CssClassSelector {
+                            dot_token: DOT@870..872 "." [Newline("\n")] [],
+                            name: CssCustomIdentifier {
+                                value_token: IDENT@872..896 "case-map-value-operands" [] [Whitespace(" ")],
+                            },
+                        },
+                    ],
+                },
+            ],
+            block: CssDeclarationOrRuleBlock {
+                l_curly_token: L_CURLY@896..898 "{" [] [Whitespace(" ")],
+                items: CssDeclarationOrRuleList [
+                    CssDeclarationWithSemicolon {
+                        declaration: CssDeclaration {
+                            property: CssGenericProperty {
+                                name: CssIdentifier {
+                                    value_token: IDENT@898..903 "minus" [] [],
+                                },
+                                colon_token: COLON@903..904 ":" [] [],
+                                value: ScssExpression {
+                                    items: ScssExpressionItemList [
+                                        CssFunction {
+                                            name: ScssModuleMemberAccess {
+                                                module: CssIdentifier {
+                                                    value_token: IDENT@904..907 "map" [] [],
+                                                },
+                                                dot_token: DOT@907..908 "." [] [],
+                                                member: CssIdentifier {
+                                                    value_token: IDENT@908..911 "get" [] [],
+                                                },
+                                            },
+                                            l_paren_token: L_PAREN@911..912 "(" [] [],
+                                            items: CssParameterList [
+                                                ScssExpression {
+                                                    items: ScssExpressionItemList [
+                                                        ScssVariable {
+                                                            dollar_token: DOLLAR@912..913 "$" [] [],
+                                                            name: CssIdentifier {
+                                                                value_token: IDENT@913..914 "x" [] [],
+                                                            },
+                                                        },
+                                                    ],
+                                                },
+                                                COMMA@914..916 "," [] [Whitespace(" ")],
+                                                ScssExpression {
+                                                    items: ScssExpressionItemList [
+                                                        CssIdentifier {
+                                                            value_token: IDENT@916..921 "minus" [] [],
+                                                        },
+                                                    ],
+                                                },
+                                            ],
+                                            r_paren_token: R_PAREN@921..922 ")" [] [],
+                                        },
+                                    ],
+                                },
+                            },
+                            important: missing (optional),
+                        },
+                        semicolon_token: SEMICOLON@922..924 ";" [] [Whitespace(" ")],
+                    },
+                    CssDeclarationWithSemicolon {
+                        declaration: CssDeclaration {
+                            property: CssGenericProperty {
+                                name: CssIdentifier {
+                                    value_token: IDENT@924..928 "plus" [] [],
+                                },
+                                colon_token: COLON@928..929 ":" [] [],
+                                value: ScssExpression {
+                                    items: ScssExpressionItemList [
+                                        CssFunction {
+                                            name: ScssModuleMemberAccess {
+                                                module: CssIdentifier {
+                                                    value_token: IDENT@929..932 "map" [] [],
+                                                },
+                                                dot_token: DOT@932..933 "." [] [],
+                                                member: CssIdentifier {
+                                                    value_token: IDENT@933..936 "get" [] [],
+                                                },
+                                            },
+                                            l_paren_token: L_PAREN@936..937 "(" [] [],
+                                            items: CssParameterList [
+                                                ScssExpression {
+                                                    items: ScssExpressionItemList [
+                                                        ScssVariable {
+                                                            dollar_token: DOLLAR@937..938 "$" [] [],
+                                                            name: CssIdentifier {
+                                                                value_token: IDENT@938..939 "x" [] [],
+                                                            },
+                                                        },
+                                                    ],
+                                                },
+                                                COMMA@939..941 "," [] [Whitespace(" ")],
+                                                ScssExpression {
+                                                    items: ScssExpressionItemList [
+                                                        CssIdentifier {
+                                                            value_token: IDENT@941..945 "plus" [] [],
+                                                        },
+                                                    ],
+                                                },
+                                            ],
+                                            r_paren_token: R_PAREN@945..946 ")" [] [],
+                                        },
+                                    ],
+                                },
+                            },
+                            important: missing (optional),
+                        },
+                        semicolon_token: SEMICOLON@946..948 ";" [] [Whitespace(" ")],
+                    },
+                    CssDeclarationWithSemicolon {
+                        declaration: CssDeclaration {
+                            property: CssGenericProperty {
+                                name: CssIdentifier {
+                                    value_token: IDENT@948..955 "negated" [] [],
+                                },
+                                colon_token: COLON@955..956 ":" [] [],
+                                value: ScssExpression {
+                                    items: ScssExpressionItemList [
+                                        CssFunction {
+                                            name: ScssModuleMemberAccess {
+                                                module: CssIdentifier {
+                                                    value_token: IDENT@956..959 "map" [] [],
+                                                },
+                                                dot_token: DOT@959..960 "." [] [],
+                                                member: CssIdentifier {
+                                                    value_token: IDENT@960..963 "get" [] [],
+                                                },
+                                            },
+                                            l_paren_token: L_PAREN@963..964 "(" [] [],
+                                            items: CssParameterList [
+                                                ScssExpression {
+                                                    items: ScssExpressionItemList [
+                                                        ScssVariable {
+                                                            dollar_token: DOLLAR@964..965 "$" [] [],
+                                                            name: CssIdentifier {
+                                                                value_token: IDENT@965..966 "x" [] [],
+                                                            },
+                                                        },
+                                                    ],
+                                                },
+                                                COMMA@966..968 "," [] [Whitespace(" ")],
+                                                ScssExpression {
+                                                    items: ScssExpressionItemList [
+                                                        CssIdentifier {
+                                                            value_token: IDENT@968..975 "negated" [] [],
+                                                        },
+                                                    ],
+                                                },
+                                            ],
+                                            r_paren_token: R_PAREN@975..976 ")" [] [],
+                                        },
+                                    ],
+                                },
+                            },
+                            important: missing (optional),
+                        },
+                        semicolon_token: SEMICOLON@976..978 ";" [] [Whitespace(" ")],
+                    },
+                    CssDeclarationWithSemicolon {
+                        declaration: CssDeclaration {
+                            property: CssGenericProperty {
+                                name: CssIdentifier {
+                                    value_token: IDENT@978..988 "comparison" [] [],
+                                },
+                                colon_token: COLON@988..989 ":" [] [],
+                                value: ScssExpression {
+                                    items: ScssExpressionItemList [
+                                        CssFunction {
+                                            name: ScssModuleMemberAccess {
+                                                module: CssIdentifier {
+                                                    value_token: IDENT@989..992 "map" [] [],
+                                                },
+                                                dot_token: DOT@992..993 "." [] [],
+                                                member: CssIdentifier {
+                                                    value_token: IDENT@993..996 "get" [] [],
+                                                },
+                                            },
+                                            l_paren_token: L_PAREN@996..997 "(" [] [],
+                                            items: CssParameterList [
+                                                ScssExpression {
+                                                    items: ScssExpressionItemList [
+                                                        ScssVariable {
+                                                            dollar_token: DOLLAR@997..998 "$" [] [],
+                                                            name: CssIdentifier {
+                                                                value_token: IDENT@998..999 "x" [] [],
+                                                            },
+                                                        },
+                                                    ],
+                                                },
+                                                COMMA@999..1001 "," [] [Whitespace(" ")],
+                                                ScssExpression {
+                                                    items: ScssExpressionItemList [
+                                                        CssIdentifier {
+                                                            value_token: IDENT@1001..1011 "comparison" [] [],
+                                                        },
+                                                    ],
+                                                },
+                                            ],
+                                            r_paren_token: R_PAREN@1011..1012 ")" [] [],
+                                        },
+                                    ],
+                                },
+                            },
+                            important: missing (optional),
+                        },
+                        semicolon_token: SEMICOLON@1012..1014 ";" [] [Whitespace(" ")],
+                    },
+                ],
+                r_curly_token: R_CURLY@1014..1015 "}" [] [],
+            },
+        },
+        ScssVariableDeclaration {
+            name: ScssVariable {
+                dollar_token: DOLLAR@1015..1018 "$" [Newline("\n"), Newline("\n")] [],
+                name: CssIdentifier {
+                    value_token: IDENT@1018..1021 "gap" [] [],
+                },
+            },
+            colon_token: COLON@1021..1023 ":" [] [Whitespace(" ")],
+            value: ScssExpression {
+                items: ScssExpressionItemList [
+                    CssRegularDimension {
+                        value_token: CSS_NUMBER_LITERAL@1023..1024 "8" [] [],
+                        unit_token: IDENT@1024..1026 "px" [] [],
+                    },
+                ],
+            },
+            modifiers: ScssVariableModifierList [],
+            semicolon_token: SEMICOLON@1026..1027 ";" [] [],
+        },
+        CssQualifiedRule {
+            prelude: CssSelectorList [
+                CssCompoundSelector {
+                    nesting_selectors: CssNestedSelectorList [],
+                    simple_selector: missing (optional),
+                    sub_selectors: CssSubSelectorList [
+                        CssClassSelector {
+                            dot_token: DOT@1027..1029 "." [Newline("\n")] [],
+                            name: CssCustomIdentifier {
+                                value_token: IDENT@1029..1057 "case-interpolation-operands" [] [Whitespace(" ")],
+                            },
+                        },
+                    ],
+                },
+            ],
+            block: CssDeclarationOrRuleBlock {
+                l_curly_token: L_CURLY@1057..1059 "{" [] [Whitespace(" ")],
+                items: CssDeclarationOrRuleList [
+                    CssDeclarationWithSemicolon {
+                        declaration: CssDeclaration {
+                            property: CssGenericProperty {
+                                name: CssIdentifier {
+                                    value_token: IDENT@1059..1064 "minus" [] [],
+                                },
+                                colon_token: COLON@1064..1065 ":" [] [],
+                                value: ScssExpression {
+                                    items: ScssExpressionItemList [
+                                        ScssInterpolation {
+                                            hash_token: HASH@1065..1066 "#" [] [],
+                                            l_curly_token: L_CURLY@1066..1067 "{" [] [],
+                                            value: ScssExpression {
+                                                items: ScssExpressionItemList [
+                                                    ScssUnaryExpression {
+                                                        operator: MINUS@1067..1068 "-" [] [],
+                                                        expression: ScssVariable {
+                                                            dollar_token: DOLLAR@1068..1069 "$" [] [],
+                                                            name: CssIdentifier {
+                                                                value_token: IDENT@1069..1072 "gap" [] [],
+                                                            },
+                                                        },
+                                                    },
+                                                ],
+                                            },
+                                            r_curly_token: R_CURLY@1072..1073 "}" [] [],
+                                        },
+                                    ],
+                                },
+                            },
+                            important: missing (optional),
+                        },
+                        semicolon_token: SEMICOLON@1073..1075 ";" [] [Whitespace(" ")],
+                    },
+                    CssDeclarationWithSemicolon {
+                        declaration: CssDeclaration {
+                            property: CssGenericProperty {
+                                name: CssIdentifier {
+                                    value_token: IDENT@1075..1079 "plus" [] [],
+                                },
+                                colon_token: COLON@1079..1080 ":" [] [],
+                                value: ScssExpression {
+                                    items: ScssExpressionItemList [
+                                        ScssInterpolation {
+                                            hash_token: HASH@1080..1081 "#" [] [],
+                                            l_curly_token: L_CURLY@1081..1082 "{" [] [],
+                                            value: ScssExpression {
+                                                items: ScssExpressionItemList [
+                                                    ScssUnaryExpression {
+                                                        operator: PLUS@1082..1083 "+" [] [],
+                                                        expression: ScssVariable {
+                                                            dollar_token: DOLLAR@1083..1084 "$" [] [],
+                                                            name: CssIdentifier {
+                                                                value_token: IDENT@1084..1087 "gap" [] [],
+                                                            },
+                                                        },
+                                                    },
+                                                ],
+                                            },
+                                            r_curly_token: R_CURLY@1087..1088 "}" [] [],
+                                        },
+                                    ],
+                                },
+                            },
+                            important: missing (optional),
+                        },
+                        semicolon_token: SEMICOLON@1088..1090 ";" [] [Whitespace(" ")],
+                    },
+                    CssDeclarationWithSemicolon {
+                        declaration: CssDeclaration {
+                            property: CssGenericProperty {
+                                name: CssIdentifier {
+                                    value_token: IDENT@1090..1097 "negated" [] [],
+                                },
+                                colon_token: COLON@1097..1098 ":" [] [],
+                                value: ScssExpression {
+                                    items: ScssExpressionItemList [
+                                        ScssInterpolation {
+                                            hash_token: HASH@1098..1099 "#" [] [],
+                                            l_curly_token: L_CURLY@1099..1100 "{" [] [],
+                                            value: ScssExpression {
+                                                items: ScssExpressionItemList [
+                                                    ScssUnaryExpression {
+                                                        operator: NOT_KW@1100..1104 "not" [] [Whitespace(" ")],
+                                                        expression: CssIdentifier {
+                                                            value_token: IDENT@1104..1109 "false" [] [],
+                                                        },
+                                                    },
+                                                ],
+                                            },
+                                            r_curly_token: R_CURLY@1109..1110 "}" [] [],
+                                        },
+                                    ],
+                                },
+                            },
+                            important: missing (optional),
+                        },
+                        semicolon_token: SEMICOLON@1110..1112 ";" [] [Whitespace(" ")],
+                    },
+                    CssDeclarationWithSemicolon {
+                        declaration: CssDeclaration {
+                            property: CssGenericProperty {
+                                name: CssIdentifier {
+                                    value_token: IDENT@1112..1122 "comparison" [] [],
+                                },
+                                colon_token: COLON@1122..1123 ":" [] [],
+                                value: ScssExpression {
+                                    items: ScssExpressionItemList [
+                                        ScssInterpolation {
+                                            hash_token: HASH@1123..1124 "#" [] [],
+                                            l_curly_token: L_CURLY@1124..1125 "{" [] [],
+                                            value: ScssExpression {
+                                                items: ScssExpressionItemList [
+                                                    ScssBinaryExpression {
+                                                        left: CssNumber {
+                                                            value_token: CSS_NUMBER_LITERAL@1125..1127 "1" [] [Whitespace(" ")],
+                                                        },
+                                                        operator: L_ANGLE@1127..1129 "<" [] [Whitespace(" ")],
+                                                        right: CssNumber {
+                                                            value_token: CSS_NUMBER_LITERAL@1129..1130 "2" [] [],
+                                                        },
+                                                    },
+                                                ],
+                                            },
+                                            r_curly_token: R_CURLY@1130..1131 "}" [] [],
+                                        },
+                                    ],
+                                },
+                            },
+                            important: missing (optional),
+                        },
+                        semicolon_token: SEMICOLON@1131..1133 ";" [] [Whitespace(" ")],
+                    },
+                ],
+                r_curly_token: R_CURLY@1133..1134 "}" [] [],
+            },
+        },
     ],
-    eof_token: EOF@791..792 "" [Newline("\n")] [],
+    eof_token: EOF@1134..1135 "" [Newline("\n")] [],
 }
 ```
 
 ## CST
 
 ```
-0: CSS_ROOT@0..792
+0: CSS_ROOT@0..1135
   0: (empty)
-  1: CSS_ROOT_ITEM_LIST@0..791
+  1: CSS_ROOT_ITEM_LIST@0..1134
     0: CSS_AT_RULE@0..16
       0: AT@0..1 "@" [] []
       1: SCSS_USE_AT_RULE@1..16
@@ -1778,6 +2308,341 @@ CssRoot {
               1: (empty)
             1: SEMICOLON@788..790 ";" [] [Whitespace(" ")]
         2: R_CURLY@790..791 "}" [] []
-  2: EOF@791..792 "" [Newline("\n")] []
+    20: SCSS_VARIABLE_DECLARATION@791..804
+      0: SCSS_VARIABLE@791..797
+        0: DOLLAR@791..794 "$" [Newline("\n"), Newline("\n")] []
+        1: CSS_IDENTIFIER@794..797
+          0: IDENT@794..797 "gap" [] []
+      1: COLON@797..799 ":" [] [Whitespace(" ")]
+      2: SCSS_EXPRESSION@799..802
+        0: SCSS_EXPRESSION_ITEM_LIST@799..802
+          0: CSS_REGULAR_DIMENSION@799..802
+            0: CSS_NUMBER_LITERAL@799..800 "8" [] []
+            1: IDENT@800..802 "px" [] []
+      3: SCSS_VARIABLE_MODIFIER_LIST@802..802
+      4: SEMICOLON@802..804 ";" [] [Whitespace(" ")]
+    21: SCSS_VARIABLE_DECLARATION@804..870
+      0: SCSS_VARIABLE@804..806
+        0: DOLLAR@804..805 "$" [] []
+        1: CSS_IDENTIFIER@805..806
+          0: IDENT@805..806 "x" [] []
+      1: COLON@806..807 ":" [] []
+      2: SCSS_EXPRESSION@807..869
+        0: SCSS_EXPRESSION_ITEM_LIST@807..869
+          0: SCSS_MAP_EXPRESSION@807..869
+            0: L_PAREN@807..808 "(" [] []
+            1: SCSS_MAP_EXPRESSION_PAIR_LIST@808..868
+              0: SCSS_MAP_EXPRESSION_PAIR@808..819
+                0: SCSS_EXPRESSION@808..813
+                  0: SCSS_EXPRESSION_ITEM_LIST@808..813
+                    0: CSS_IDENTIFIER@808..813
+                      0: IDENT@808..813 "minus" [] []
+                1: COLON@813..814 ":" [] []
+                2: SCSS_EXPRESSION@814..819
+                  0: SCSS_EXPRESSION_ITEM_LIST@814..819
+                    0: SCSS_UNARY_EXPRESSION@814..819
+                      0: MINUS@814..815 "-" [] []
+                      1: SCSS_VARIABLE@815..819
+                        0: DOLLAR@815..816 "$" [] []
+                        1: CSS_IDENTIFIER@816..819
+                          0: IDENT@816..819 "gap" [] []
+              1: COMMA@819..821 "," [] [Whitespace(" ")]
+              2: SCSS_MAP_EXPRESSION_PAIR@821..831
+                0: SCSS_EXPRESSION@821..825
+                  0: SCSS_EXPRESSION_ITEM_LIST@821..825
+                    0: CSS_IDENTIFIER@821..825
+                      0: IDENT@821..825 "plus" [] []
+                1: COLON@825..826 ":" [] []
+                2: SCSS_EXPRESSION@826..831
+                  0: SCSS_EXPRESSION_ITEM_LIST@826..831
+                    0: SCSS_UNARY_EXPRESSION@826..831
+                      0: PLUS@826..827 "+" [] []
+                      1: SCSS_VARIABLE@827..831
+                        0: DOLLAR@827..828 "$" [] []
+                        1: CSS_IDENTIFIER@828..831
+                          0: IDENT@828..831 "gap" [] []
+              3: COMMA@831..833 "," [] [Whitespace(" ")]
+              4: SCSS_MAP_EXPRESSION_PAIR@833..850
+                0: SCSS_EXPRESSION@833..840
+                  0: SCSS_EXPRESSION_ITEM_LIST@833..840
+                    0: CSS_IDENTIFIER@833..840
+                      0: IDENT@833..840 "negated" [] []
+                1: COLON@840..841 ":" [] []
+                2: SCSS_EXPRESSION@841..850
+                  0: SCSS_EXPRESSION_ITEM_LIST@841..850
+                    0: SCSS_UNARY_EXPRESSION@841..850
+                      0: NOT_KW@841..845 "not" [] [Whitespace(" ")]
+                      1: CSS_IDENTIFIER@845..850
+                        0: IDENT@845..850 "false" [] []
+              5: COMMA@850..852 "," [] [Whitespace(" ")]
+              6: SCSS_MAP_EXPRESSION_PAIR@852..868
+                0: SCSS_EXPRESSION@852..862
+                  0: SCSS_EXPRESSION_ITEM_LIST@852..862
+                    0: CSS_IDENTIFIER@852..862
+                      0: IDENT@852..862 "comparison" [] []
+                1: COLON@862..863 ":" [] []
+                2: SCSS_EXPRESSION@863..868
+                  0: SCSS_EXPRESSION_ITEM_LIST@863..868
+                    0: SCSS_BINARY_EXPRESSION@863..868
+                      0: CSS_NUMBER@863..865
+                        0: CSS_NUMBER_LITERAL@863..865 "1" [] [Whitespace(" ")]
+                      1: L_ANGLE@865..867 "<" [] [Whitespace(" ")]
+                      2: CSS_NUMBER@867..868
+                        0: CSS_NUMBER_LITERAL@867..868 "2" [] []
+            2: R_PAREN@868..869 ")" [] []
+      3: SCSS_VARIABLE_MODIFIER_LIST@869..869
+      4: SEMICOLON@869..870 ";" [] []
+    22: CSS_QUALIFIED_RULE@870..1015
+      0: CSS_SELECTOR_LIST@870..896
+        0: CSS_COMPOUND_SELECTOR@870..896
+          0: CSS_NESTED_SELECTOR_LIST@870..870
+          1: (empty)
+          2: CSS_SUB_SELECTOR_LIST@870..896
+            0: CSS_CLASS_SELECTOR@870..896
+              0: DOT@870..872 "." [Newline("\n")] []
+              1: CSS_CUSTOM_IDENTIFIER@872..896
+                0: IDENT@872..896 "case-map-value-operands" [] [Whitespace(" ")]
+      1: CSS_DECLARATION_OR_RULE_BLOCK@896..1015
+        0: L_CURLY@896..898 "{" [] [Whitespace(" ")]
+        1: CSS_DECLARATION_OR_RULE_LIST@898..1014
+          0: CSS_DECLARATION_WITH_SEMICOLON@898..924
+            0: CSS_DECLARATION@898..922
+              0: CSS_GENERIC_PROPERTY@898..922
+                0: CSS_IDENTIFIER@898..903
+                  0: IDENT@898..903 "minus" [] []
+                1: COLON@903..904 ":" [] []
+                2: SCSS_EXPRESSION@904..922
+                  0: SCSS_EXPRESSION_ITEM_LIST@904..922
+                    0: CSS_FUNCTION@904..922
+                      0: SCSS_MODULE_MEMBER_ACCESS@904..911
+                        0: CSS_IDENTIFIER@904..907
+                          0: IDENT@904..907 "map" [] []
+                        1: DOT@907..908 "." [] []
+                        2: CSS_IDENTIFIER@908..911
+                          0: IDENT@908..911 "get" [] []
+                      1: L_PAREN@911..912 "(" [] []
+                      2: CSS_PARAMETER_LIST@912..921
+                        0: SCSS_EXPRESSION@912..914
+                          0: SCSS_EXPRESSION_ITEM_LIST@912..914
+                            0: SCSS_VARIABLE@912..914
+                              0: DOLLAR@912..913 "$" [] []
+                              1: CSS_IDENTIFIER@913..914
+                                0: IDENT@913..914 "x" [] []
+                        1: COMMA@914..916 "," [] [Whitespace(" ")]
+                        2: SCSS_EXPRESSION@916..921
+                          0: SCSS_EXPRESSION_ITEM_LIST@916..921
+                            0: CSS_IDENTIFIER@916..921
+                              0: IDENT@916..921 "minus" [] []
+                      3: R_PAREN@921..922 ")" [] []
+              1: (empty)
+            1: SEMICOLON@922..924 ";" [] [Whitespace(" ")]
+          1: CSS_DECLARATION_WITH_SEMICOLON@924..948
+            0: CSS_DECLARATION@924..946
+              0: CSS_GENERIC_PROPERTY@924..946
+                0: CSS_IDENTIFIER@924..928
+                  0: IDENT@924..928 "plus" [] []
+                1: COLON@928..929 ":" [] []
+                2: SCSS_EXPRESSION@929..946
+                  0: SCSS_EXPRESSION_ITEM_LIST@929..946
+                    0: CSS_FUNCTION@929..946
+                      0: SCSS_MODULE_MEMBER_ACCESS@929..936
+                        0: CSS_IDENTIFIER@929..932
+                          0: IDENT@929..932 "map" [] []
+                        1: DOT@932..933 "." [] []
+                        2: CSS_IDENTIFIER@933..936
+                          0: IDENT@933..936 "get" [] []
+                      1: L_PAREN@936..937 "(" [] []
+                      2: CSS_PARAMETER_LIST@937..945
+                        0: SCSS_EXPRESSION@937..939
+                          0: SCSS_EXPRESSION_ITEM_LIST@937..939
+                            0: SCSS_VARIABLE@937..939
+                              0: DOLLAR@937..938 "$" [] []
+                              1: CSS_IDENTIFIER@938..939
+                                0: IDENT@938..939 "x" [] []
+                        1: COMMA@939..941 "," [] [Whitespace(" ")]
+                        2: SCSS_EXPRESSION@941..945
+                          0: SCSS_EXPRESSION_ITEM_LIST@941..945
+                            0: CSS_IDENTIFIER@941..945
+                              0: IDENT@941..945 "plus" [] []
+                      3: R_PAREN@945..946 ")" [] []
+              1: (empty)
+            1: SEMICOLON@946..948 ";" [] [Whitespace(" ")]
+          2: CSS_DECLARATION_WITH_SEMICOLON@948..978
+            0: CSS_DECLARATION@948..976
+              0: CSS_GENERIC_PROPERTY@948..976
+                0: CSS_IDENTIFIER@948..955
+                  0: IDENT@948..955 "negated" [] []
+                1: COLON@955..956 ":" [] []
+                2: SCSS_EXPRESSION@956..976
+                  0: SCSS_EXPRESSION_ITEM_LIST@956..976
+                    0: CSS_FUNCTION@956..976
+                      0: SCSS_MODULE_MEMBER_ACCESS@956..963
+                        0: CSS_IDENTIFIER@956..959
+                          0: IDENT@956..959 "map" [] []
+                        1: DOT@959..960 "." [] []
+                        2: CSS_IDENTIFIER@960..963
+                          0: IDENT@960..963 "get" [] []
+                      1: L_PAREN@963..964 "(" [] []
+                      2: CSS_PARAMETER_LIST@964..975
+                        0: SCSS_EXPRESSION@964..966
+                          0: SCSS_EXPRESSION_ITEM_LIST@964..966
+                            0: SCSS_VARIABLE@964..966
+                              0: DOLLAR@964..965 "$" [] []
+                              1: CSS_IDENTIFIER@965..966
+                                0: IDENT@965..966 "x" [] []
+                        1: COMMA@966..968 "," [] [Whitespace(" ")]
+                        2: SCSS_EXPRESSION@968..975
+                          0: SCSS_EXPRESSION_ITEM_LIST@968..975
+                            0: CSS_IDENTIFIER@968..975
+                              0: IDENT@968..975 "negated" [] []
+                      3: R_PAREN@975..976 ")" [] []
+              1: (empty)
+            1: SEMICOLON@976..978 ";" [] [Whitespace(" ")]
+          3: CSS_DECLARATION_WITH_SEMICOLON@978..1014
+            0: CSS_DECLARATION@978..1012
+              0: CSS_GENERIC_PROPERTY@978..1012
+                0: CSS_IDENTIFIER@978..988
+                  0: IDENT@978..988 "comparison" [] []
+                1: COLON@988..989 ":" [] []
+                2: SCSS_EXPRESSION@989..1012
+                  0: SCSS_EXPRESSION_ITEM_LIST@989..1012
+                    0: CSS_FUNCTION@989..1012
+                      0: SCSS_MODULE_MEMBER_ACCESS@989..996
+                        0: CSS_IDENTIFIER@989..992
+                          0: IDENT@989..992 "map" [] []
+                        1: DOT@992..993 "." [] []
+                        2: CSS_IDENTIFIER@993..996
+                          0: IDENT@993..996 "get" [] []
+                      1: L_PAREN@996..997 "(" [] []
+                      2: CSS_PARAMETER_LIST@997..1011
+                        0: SCSS_EXPRESSION@997..999
+                          0: SCSS_EXPRESSION_ITEM_LIST@997..999
+                            0: SCSS_VARIABLE@997..999
+                              0: DOLLAR@997..998 "$" [] []
+                              1: CSS_IDENTIFIER@998..999
+                                0: IDENT@998..999 "x" [] []
+                        1: COMMA@999..1001 "," [] [Whitespace(" ")]
+                        2: SCSS_EXPRESSION@1001..1011
+                          0: SCSS_EXPRESSION_ITEM_LIST@1001..1011
+                            0: CSS_IDENTIFIER@1001..1011
+                              0: IDENT@1001..1011 "comparison" [] []
+                      3: R_PAREN@1011..1012 ")" [] []
+              1: (empty)
+            1: SEMICOLON@1012..1014 ";" [] [Whitespace(" ")]
+        2: R_CURLY@1014..1015 "}" [] []
+    23: SCSS_VARIABLE_DECLARATION@1015..1027
+      0: SCSS_VARIABLE@1015..1021
+        0: DOLLAR@1015..1018 "$" [Newline("\n"), Newline("\n")] []
+        1: CSS_IDENTIFIER@1018..1021
+          0: IDENT@1018..1021 "gap" [] []
+      1: COLON@1021..1023 ":" [] [Whitespace(" ")]
+      2: SCSS_EXPRESSION@1023..1026
+        0: SCSS_EXPRESSION_ITEM_LIST@1023..1026
+          0: CSS_REGULAR_DIMENSION@1023..1026
+            0: CSS_NUMBER_LITERAL@1023..1024 "8" [] []
+            1: IDENT@1024..1026 "px" [] []
+      3: SCSS_VARIABLE_MODIFIER_LIST@1026..1026
+      4: SEMICOLON@1026..1027 ";" [] []
+    24: CSS_QUALIFIED_RULE@1027..1134
+      0: CSS_SELECTOR_LIST@1027..1057
+        0: CSS_COMPOUND_SELECTOR@1027..1057
+          0: CSS_NESTED_SELECTOR_LIST@1027..1027
+          1: (empty)
+          2: CSS_SUB_SELECTOR_LIST@1027..1057
+            0: CSS_CLASS_SELECTOR@1027..1057
+              0: DOT@1027..1029 "." [Newline("\n")] []
+              1: CSS_CUSTOM_IDENTIFIER@1029..1057
+                0: IDENT@1029..1057 "case-interpolation-operands" [] [Whitespace(" ")]
+      1: CSS_DECLARATION_OR_RULE_BLOCK@1057..1134
+        0: L_CURLY@1057..1059 "{" [] [Whitespace(" ")]
+        1: CSS_DECLARATION_OR_RULE_LIST@1059..1133
+          0: CSS_DECLARATION_WITH_SEMICOLON@1059..1075
+            0: CSS_DECLARATION@1059..1073
+              0: CSS_GENERIC_PROPERTY@1059..1073
+                0: CSS_IDENTIFIER@1059..1064
+                  0: IDENT@1059..1064 "minus" [] []
+                1: COLON@1064..1065 ":" [] []
+                2: SCSS_EXPRESSION@1065..1073
+                  0: SCSS_EXPRESSION_ITEM_LIST@1065..1073
+                    0: SCSS_INTERPOLATION@1065..1073
+                      0: HASH@1065..1066 "#" [] []
+                      1: L_CURLY@1066..1067 "{" [] []
+                      2: SCSS_EXPRESSION@1067..1072
+                        0: SCSS_EXPRESSION_ITEM_LIST@1067..1072
+                          0: SCSS_UNARY_EXPRESSION@1067..1072
+                            0: MINUS@1067..1068 "-" [] []
+                            1: SCSS_VARIABLE@1068..1072
+                              0: DOLLAR@1068..1069 "$" [] []
+                              1: CSS_IDENTIFIER@1069..1072
+                                0: IDENT@1069..1072 "gap" [] []
+                      3: R_CURLY@1072..1073 "}" [] []
+              1: (empty)
+            1: SEMICOLON@1073..1075 ";" [] [Whitespace(" ")]
+          1: CSS_DECLARATION_WITH_SEMICOLON@1075..1090
+            0: CSS_DECLARATION@1075..1088
+              0: CSS_GENERIC_PROPERTY@1075..1088
+                0: CSS_IDENTIFIER@1075..1079
+                  0: IDENT@1075..1079 "plus" [] []
+                1: COLON@1079..1080 ":" [] []
+                2: SCSS_EXPRESSION@1080..1088
+                  0: SCSS_EXPRESSION_ITEM_LIST@1080..1088
+                    0: SCSS_INTERPOLATION@1080..1088
+                      0: HASH@1080..1081 "#" [] []
+                      1: L_CURLY@1081..1082 "{" [] []
+                      2: SCSS_EXPRESSION@1082..1087
+                        0: SCSS_EXPRESSION_ITEM_LIST@1082..1087
+                          0: SCSS_UNARY_EXPRESSION@1082..1087
+                            0: PLUS@1082..1083 "+" [] []
+                            1: SCSS_VARIABLE@1083..1087
+                              0: DOLLAR@1083..1084 "$" [] []
+                              1: CSS_IDENTIFIER@1084..1087
+                                0: IDENT@1084..1087 "gap" [] []
+                      3: R_CURLY@1087..1088 "}" [] []
+              1: (empty)
+            1: SEMICOLON@1088..1090 ";" [] [Whitespace(" ")]
+          2: CSS_DECLARATION_WITH_SEMICOLON@1090..1112
+            0: CSS_DECLARATION@1090..1110
+              0: CSS_GENERIC_PROPERTY@1090..1110
+                0: CSS_IDENTIFIER@1090..1097
+                  0: IDENT@1090..1097 "negated" [] []
+                1: COLON@1097..1098 ":" [] []
+                2: SCSS_EXPRESSION@1098..1110
+                  0: SCSS_EXPRESSION_ITEM_LIST@1098..1110
+                    0: SCSS_INTERPOLATION@1098..1110
+                      0: HASH@1098..1099 "#" [] []
+                      1: L_CURLY@1099..1100 "{" [] []
+                      2: SCSS_EXPRESSION@1100..1109
+                        0: SCSS_EXPRESSION_ITEM_LIST@1100..1109
+                          0: SCSS_UNARY_EXPRESSION@1100..1109
+                            0: NOT_KW@1100..1104 "not" [] [Whitespace(" ")]
+                            1: CSS_IDENTIFIER@1104..1109
+                              0: IDENT@1104..1109 "false" [] []
+                      3: R_CURLY@1109..1110 "}" [] []
+              1: (empty)
+            1: SEMICOLON@1110..1112 ";" [] [Whitespace(" ")]
+          3: CSS_DECLARATION_WITH_SEMICOLON@1112..1133
+            0: CSS_DECLARATION@1112..1131
+              0: CSS_GENERIC_PROPERTY@1112..1131
+                0: CSS_IDENTIFIER@1112..1122
+                  0: IDENT@1112..1122 "comparison" [] []
+                1: COLON@1122..1123 ":" [] []
+                2: SCSS_EXPRESSION@1123..1131
+                  0: SCSS_EXPRESSION_ITEM_LIST@1123..1131
+                    0: SCSS_INTERPOLATION@1123..1131
+                      0: HASH@1123..1124 "#" [] []
+                      1: L_CURLY@1124..1125 "{" [] []
+                      2: SCSS_EXPRESSION@1125..1130
+                        0: SCSS_EXPRESSION_ITEM_LIST@1125..1130
+                          0: SCSS_BINARY_EXPRESSION@1125..1130
+                            0: CSS_NUMBER@1125..1127
+                              0: CSS_NUMBER_LITERAL@1125..1127 "1" [] [Whitespace(" ")]
+                            1: L_ANGLE@1127..1129 "<" [] [Whitespace(" ")]
+                            2: CSS_NUMBER@1129..1130
+                              0: CSS_NUMBER_LITERAL@1129..1130 "2" [] []
+                      3: R_CURLY@1130..1131 "}" [] []
+              1: (empty)
+            1: SEMICOLON@1131..1133 ";" [] [Whitespace(" ")]
+        2: R_CURLY@1133..1134 "}" [] []
+  2: EOF@1134..1135 "" [Newline("\n")] []
 
 ```

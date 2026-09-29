@@ -15,3 +15,9 @@ $gap: 8px;
 @function minus() { @return -$gap; } @function plus() { @return +$gap; }
 @function negated() { @return not false; } @function compared() { @return 1 < 2; }
 .case-return-operands { minus:minus(); plus:plus(); negated:negated(); comparison:compared(); }
+
+$gap: 8px; $x:(minus:-$gap, plus:+$gap, negated:not false, comparison:1 < 2);
+.case-map-value-operands { minus:map.get($x, minus); plus:map.get($x, plus); negated:map.get($x, negated); comparison:map.get($x, comparison); }
+
+$gap: 8px;
+.case-interpolation-operands { minus:#{-$gap}; plus:#{+$gap}; negated:#{not false}; comparison:#{1 < 2}; }
