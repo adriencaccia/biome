@@ -1,0 +1,11 @@
+@use "sass:list";
+@use "sass:meta";
+
+$x:[NOT];
+.uppercase-not{length:list.length($x);value:meta.inspect($x);}
+
+$x:[foo AND];
+.uppercase-and{length:list.length($x);value:meta.inspect($x);}
+
+$x:[true OR false];
+.uppercase-or{length:list.length($x);value:meta.inspect($x);}
