@@ -1,0 +1,5 @@
+$gap:8px;
+$x:[1/* left */ </* right */2,-/* minus */$gap/* before comma */,/* after comma */not/* boolean */false,/* final */];
+$y:[+/* plus */$gap];
+$z:[1/* final left */</* final right */2];
+.comments-boundaries{values:$x;plus:$y;comparison:$z;}

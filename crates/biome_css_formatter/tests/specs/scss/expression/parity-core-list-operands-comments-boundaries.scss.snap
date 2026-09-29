@@ -1,0 +1,38 @@
+---
+source: crates/biome_formatter_test/src/snapshot_builder.rs
+info: scss/expression/parity-core-list-operands-comments-boundaries.scss
+---
+
+# Input
+
+```scss
+$gap:8px;
+$x:[1/* left */ </* right */2,-/* minus */$gap/* before comma */,/* after comma */not/* boolean */false,/* final */];
+$y:[+/* plus */$gap];
+$z:[1/* final left */</* final right */2];
+.comments-boundaries{values:$x;plus:$y;comparison:$z;}
+
+```
+
+
+# Formatted
+
+```scss
+$gap: 8px;
+$x: [
+	1 /* left */ < /* right */ 2, -/* minus */ $gap /* before comma */, /* after comma */
+	not /* boolean */ false, /* final */];
+$y: [+/* plus */ $gap];
+$z: [1 /* final left */ < /* final right */ 2];
+.comments-boundaries {
+	values: $x;
+	plus: $y;
+	comparison: $z;
+}
+
+```
+
+# Lines exceeding max width of 80 characters
+```
+    3: 	1 /* left */ < /* right */ 2, -/* minus */ $gap /* before comma */, /* after comma */
+```

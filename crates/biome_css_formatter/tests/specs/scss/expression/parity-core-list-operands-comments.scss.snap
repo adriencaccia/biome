@@ -1,0 +1,37 @@
+---
+source: crates/biome_formatter_test/src/snapshot_builder.rs
+assertion_line: 249
+info: scss/expression/parity-core-list-operands-comments.scss
+---
+
+# Input
+
+```scss
+@use "sass:list";
+@use "sass:map";
+
+$gap:8px;
+$x:[- /* minus */ $gap, + /* plus */ $gap, not /* boolean */ false, 1 /* lhs */ < /* rhs */ 2,];
+.case-comments-operands { minus:list.nth($x,1); plus:list.nth($x,2); negated:list.nth($x,3); comparison:list.nth($x,4); }
+
+```
+
+
+# Formatted
+
+```scss
+@use "sass:list";
+@use "sass:map";
+
+$gap: 8px;
+$x: [
+	-/* minus */ $gap, +/* plus */ $gap, not /* boolean */ false,
+	1 /* lhs */ < /* rhs */ 2,];
+.case-comments-operands {
+	minus: list.nth($x, 1);
+	plus: list.nth($x, 2);
+	negated: list.nth($x, 3);
+	comparison: list.nth($x, 4);
+}
+
+```

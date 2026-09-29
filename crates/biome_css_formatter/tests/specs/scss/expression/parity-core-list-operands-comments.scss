@@ -1,0 +1,6 @@
+@use "sass:list";
+@use "sass:map";
+
+$gap:8px;
+$x:[- /* minus */ $gap, + /* plus */ $gap, not /* boolean */ false, 1 /* lhs */ < /* rhs */ 2,];
+.case-comments-operands { minus:list.nth($x,1); plus:list.nth($x,2); negated:list.nth($x,3); comparison:list.nth($x,4); }
