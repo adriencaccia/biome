@@ -1,0 +1,4 @@
+@use "sass:list";
+
+$flags:[true==false,foo==foo,false or true,true and not false];
+.identifier-operators{equal:list.nth($flags,1);same:list.nth($flags,2);either:list.nth($flags,3);both:list.nth($flags,4);length:list.length($flags);}

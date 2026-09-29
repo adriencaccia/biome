@@ -5,17 +5,21 @@ mod interpolated_url;
 mod interpolated_value;
 mod parent_selector;
 
+use crate::lexer::CssLexContext;
 use crate::parser::CssParser;
 use crate::syntax::parse_error::scss_only_syntax_error;
-use crate::syntax::scss::{is_at_scss_unary_operator, parse_scss_expression_until};
+use crate::syntax::scss::{
+    is_at_scss_binary_operator, is_at_scss_unary_operator, parse_scss_expression_from_head,
+    parse_scss_expression_until,
+};
 use crate::syntax::value::function::is_at_any_function_with_context;
 use crate::syntax::{
     CssSyntaxFeatures, ValueParsingContext, ValueParsingMode, is_at_any_value_with_context,
-    is_at_css_wide_keyword, is_at_identifier,
+    is_at_css_wide_keyword, is_at_identifier, parse_custom_identifier,
 };
 use biome_css_syntax::{CssSyntaxKind, CssSyntaxKind::CSS_BOGUS_CUSTOM_IDENTIFIER, T};
 use biome_parser::prelude::ParsedSyntax;
-use biome_parser::prelude::ParsedSyntax::Absent;
+use biome_parser::prelude::ParsedSyntax::{Absent, Present};
 use biome_parser::{Parser, SyntaxFeature, TokenSet, token_set};
 
 pub(crate) use any::{is_at_any_scss_value, parse_any_scss_value_with_context};
@@ -42,8 +46,9 @@ pub(crate) const SCSS_BRACKETED_VALUE_EXPRESSION_END_SET: TokenSet<CssSyntaxKind
 
 /// Parses a Sass expression item inside the shared bracketed-value parser.
 ///
-/// This keeps plain CSS custom identifiers on the fallback path, while parsing
-/// Sass-only values and CSS-wide keywords as expressions.
+/// Leaves plain CSS custom identifiers on the fallback path. In SCSS,
+/// identifiers with operator tails are parsed as expressions alongside
+/// Sass-only values, unary operators and CSS-wide keywords.
 ///
 /// Examples:
 /// ```scss
@@ -56,8 +61,37 @@ pub(crate) const SCSS_BRACKETED_VALUE_EXPRESSION_END_SET: TokenSet<CssSyntaxKind
 /// ```
 #[inline]
 pub(crate) fn parse_scss_bracketed_value_expression_item(p: &mut CssParser) -> ParsedSyntax {
-    if !is_at_scss_bracketed_value_expression_item(p) {
-        return Absent;
+    // CSS grid line names may use `not` as a custom identifier.
+    let is_unary_expression = (!p.at(T![not]) || CssSyntaxFeatures::Scss.is_supported(p))
+        && is_at_scss_unary_operator(p);
+
+    if !p.at(T!['(']) && !is_unary_expression {
+        let context = ValueParsingContext::new(p, ValueParsingMode::ScssAware);
+        let is_plain_css_custom_identifier = is_at_identifier(p)
+            && !is_at_css_wide_keyword(p)
+            && !is_at_any_function_with_context(p, context);
+
+        if is_plain_css_custom_identifier {
+            if !CssSyntaxFeatures::Scss.is_supported(p) {
+                return Absent;
+            }
+
+            let Present(head) = parse_custom_identifier(p, CssLexContext::Regular) else {
+                return Absent;
+            };
+
+            return if !p.at_ts(SCSS_BRACKETED_VALUE_EXPRESSION_END_SET)
+                && is_at_scss_binary_operator(p)
+            {
+                parse_scss_expression_from_head(p, head, SCSS_BRACKETED_VALUE_EXPRESSION_END_SET)
+            } else {
+                Present(head)
+            };
+        }
+
+        if !is_at_any_value_with_context(p, context) {
+            return Absent;
+        }
     }
 
     CssSyntaxFeatures::Scss.parse_exclusive_syntax_with_kind(
@@ -66,22 +100,4 @@ pub(crate) fn parse_scss_bracketed_value_expression_item(p: &mut CssParser) -> P
         |p, marker| scss_only_syntax_error(p, "SCSS bracketed expressions", marker.range(p)),
         Some(CSS_BOGUS_CUSTOM_IDENTIFIER),
     )
-}
-
-#[inline]
-fn is_at_scss_bracketed_value_expression_item(p: &mut CssParser) -> bool {
-    // CSS grid line names may use `not` as a custom identifier.
-    let is_unary_expression =
-        (!p.at(T![not]) || CssSyntaxFeatures::Scss.is_supported(p)) && is_at_scss_unary_operator(p);
-
-    if p.at(T!['(']) || is_unary_expression {
-        return true;
-    }
-
-    let context = ValueParsingContext::new(p, ValueParsingMode::ScssAware);
-    let is_plain_css_custom_identifier = is_at_identifier(p)
-        && !is_at_css_wide_keyword(p)
-        && !is_at_any_function_with_context(p, context);
-
-    !is_plain_css_custom_identifier && is_at_any_value_with_context(p, context)
 }

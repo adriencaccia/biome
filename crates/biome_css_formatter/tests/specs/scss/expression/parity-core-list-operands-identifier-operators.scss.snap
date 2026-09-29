@@ -1,0 +1,32 @@
+---
+source: crates/biome_formatter_test/src/snapshot_builder.rs
+assertion_line: 249
+info: scss/expression/parity-core-list-operands-identifier-operators.scss
+---
+
+# Input
+
+```scss
+@use "sass:list";
+
+$flags:[true==false,foo==foo,false or true,true and not false];
+.identifier-operators{equal:list.nth($flags,1);same:list.nth($flags,2);either:list.nth($flags,3);both:list.nth($flags,4);length:list.length($flags);}
+
+```
+
+
+# Formatted
+
+```scss
+@use "sass:list";
+
+$flags: [true == false, foo == foo, false or true, true and not false];
+.identifier-operators {
+	equal: list.nth($flags, 1);
+	same: list.nth($flags, 2);
+	either: list.nth($flags, 3);
+	both: list.nth($flags, 4);
+	length: list.length($flags);
+}
+
+```
