@@ -6,3 +6,12 @@ $gap: 8px; $a: -$gap; $b: +$gap; $c: not false; $d: 1 < 2;
 
 $gap: 8px; @function identity($x) { @return $x; }
 .case-call-operands { minus:identity(-$gap); plus:identity(+$gap); negated:identity(not false); comparison:identity(1 < 2); }
+
+$gap: 8px;
+@mixin values($a: -$gap, $b: +$gap, $c: not false, $d: 1 < 2) { minus:$a; plus:$b; negated:$c; comparison:$d; }
+.case-parameter-default-operands { @include values(); }
+
+$gap: 8px;
+@function minus() { @return -$gap; } @function plus() { @return +$gap; }
+@function negated() { @return not false; } @function compared() { @return 1 < 2; }
+.case-return-operands { minus:minus(); plus:plus(); negated:negated(); comparison:compared(); }
