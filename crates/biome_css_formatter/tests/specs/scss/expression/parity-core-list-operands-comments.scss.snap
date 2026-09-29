@@ -21,6 +21,9 @@ not false,
 1 < 2 // final item
 ]; .case-comments-line-boundary { minus:list.nth($x,1); plus:list.nth($x,2); negated:list.nth($x,3); comparison:list.nth($x,4); }
 
+$x:[1 + 2 * 3, (1 + 2) * 3, not false and false or true, 1 + 2 < 4, 4 >= 4, 2 != 3, --2];
+.case-precedence { multiply:list.nth($x,1); grouped:list.nth($x,2); logic:list.nth($x,3); comparison:list.nth($x,4); greater-equal:list.nth($x,5); unequal:list.nth($x,6); double-minus:list.nth($x,7); }
+
 ```
 
 
@@ -54,6 +57,19 @@ $x: [
 	plus: list.nth($x, 2);
 	negated: list.nth($x, 3);
 	comparison: list.nth($x, 4);
+}
+
+$x: [
+	1 + 2 * 3, (1 + 2) * 3, not false and false or true, 1 + 2 < 4, 4 >= 4, 2 != 3,
+	--2];
+.case-precedence {
+	multiply: list.nth($x, 1);
+	grouped: list.nth($x, 2);
+	logic: list.nth($x, 3);
+	comparison: list.nth($x, 4);
+	greater-equal: list.nth($x, 5);
+	unequal: list.nth($x, 6);
+	double-minus: list.nth($x, 7);
 }
 
 ```
