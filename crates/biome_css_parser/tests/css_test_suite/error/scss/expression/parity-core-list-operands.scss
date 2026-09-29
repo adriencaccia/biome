@@ -1,0 +1,13 @@
+$x: [-$]; .after-1 { color: red; }
+
+$x: (key:); .after-2 { color: red; }
+
+$x: [1 + ]; .after-3 { color: red; }
+
+$x: [1 < ]; .after-4 { color: red; }
+
+$x: [not ]; .after-5 { color: red; }
+
+$x: [1, (key:), 3]; .after-6 { color: red; }
+
+$x: [-]; .after-7 { color: red; }
