@@ -4,3 +4,10 @@
 $gap:8px;
 $x:[- /* minus */ $gap, + /* plus */ $gap, not /* boolean */ false, 1 /* lhs */ < /* rhs */ 2,];
 .case-comments-operands { minus:list.nth($x,1); plus:list.nth($x,2); negated:list.nth($x,3); comparison:list.nth($x,4); }
+
+$gap:8px; $x:[
+-$gap, // first item
++$gap, // second item
+not false,
+1 < 2 // final item
+]; .case-comments-line-boundary { minus:list.nth($x,1); plus:list.nth($x,2); negated:list.nth($x,3); comparison:list.nth($x,4); }
