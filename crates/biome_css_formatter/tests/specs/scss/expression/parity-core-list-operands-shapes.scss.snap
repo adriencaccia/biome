@@ -1,6 +1,5 @@
 ---
 source: crates/biome_formatter_test/src/snapshot_builder.rs
-assertion_line: 249
 info: scss/expression/parity-core-list-operands-shapes.scss
 ---
 
@@ -24,6 +23,10 @@ $x:[a, b]; .case-shape-bracket-comma { length:list.length($x); separator:list.se
 $x:(key: (a, b)); $v:map.get($x,key); .case-shape-map { type:meta.type-of($x); length:list.length($v); separator:list.separator($v); bracketed:list.is-bracketed($v); first:list.nth($v,1); second:list.nth($v,2); }
 
 $x:(1 + 2: arithmetic, not false: boolean); .case-map-expression-keys { numeric:map.get($x,3); boolean:map.get($x,true); }
+
+$gap:8px; $x:[(-$gap,), (not false,)]; .case-singleton-operator-commas { outer:list.length($x); minus:list.nth(list.nth($x,1),1); negated:list.nth(list.nth($x,2),1); inner:list.length(list.nth($x,1)); separator:list.separator(list.nth($x,1)); bracketed:list.is-bracketed($x); }
+
+$gap:8px; $x:[-$gap,]; .case-bracket-singleton-trailing-comma { value:list.nth($x,1); length:list.length($x); separator:list.separator($x); bracketed:list.is-bracketed($x); }
 
 ```
 
@@ -102,6 +105,26 @@ $x: (
 .case-map-expression-keys {
 	numeric: map.get($x, 3);
 	boolean: map.get($x, true);
+}
+
+$gap: 8px;
+$x: [(-$gap,), (not false,)];
+.case-singleton-operator-commas {
+	outer: list.length($x);
+	minus: list.nth(list.nth($x, 1), 1);
+	negated: list.nth(list.nth($x, 2), 1);
+	inner: list.length(list.nth($x, 1));
+	separator: list.separator(list.nth($x, 1));
+	bracketed: list.is-bracketed($x);
+}
+
+$gap: 8px;
+$x: [-$gap,];
+.case-bracket-singleton-trailing-comma {
+	value: list.nth($x, 1);
+	length: list.length($x);
+	separator: list.separator($x);
+	bracketed: list.is-bracketed($x);
 }
 
 ```
