@@ -1,0 +1,5 @@
+@use "sass:list";
+@use "sass:meta";
+@use "sass:map";
+
+$x:(); .case-shape-empty { length:list.length($x); separator:list.separator($x); bracketed:list.is-bracketed($x); type:meta.type-of($x);  }
