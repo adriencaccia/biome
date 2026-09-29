@@ -14,3 +14,6 @@ not false,
 
 $x:[1 + 2 * 3, (1 + 2) * 3, not false and false or true, 1 + 2 < 4, 4 >= 4, 2 != 3, --2];
 .case-precedence { multiply:list.nth($x,1); grouped:list.nth($x,2); logic:list.nth($x,3); comparison:list.nth($x,4); greater-equal:list.nth($x,5); unequal:list.nth($x,6); double-minus:list.nth($x,7); }
+
+$gap:8px; @function identity($x) { @return $x; } $x:identity((key:[(-$gap), [not false, 1 < 2], (+$gap,)])); $v:map.get($x,key);
+.case-nested-delimiters { minus:list.nth($v,1); negated:list.nth(list.nth($v,2),1); comparison:list.nth(list.nth($v,2),2); plus:list.nth(list.nth($v,3),1); inner-bracket:list.is-bracketed(list.nth($v,2)); inner-separator:list.separator(list.nth($v,3)); }
