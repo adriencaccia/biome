@@ -1,0 +1,51 @@
+---
+source: crates/biome_formatter_test/src/snapshot_builder.rs
+assertion_line: 249
+info: scss/expression/parity-core-list-operands-contexts.scss
+---
+
+# Input
+
+```scss
+@use "sass:map";
+@use "sass:list";
+
+$gap: 8px; $a: -$gap; $b: +$gap; $c: not false; $d: 1 < 2;
+.case-assignment-operands { minus:$a; plus:$b; negated:$c; comparison:$d; }
+
+$gap: 8px; @function identity($x) { @return $x; }
+.case-call-operands { minus:identity(-$gap); plus:identity(+$gap); negated:identity(not false); comparison:identity(1 < 2); }
+
+```
+
+
+# Formatted
+
+```scss
+@use "sass:map";
+@use "sass:list";
+
+$gap: 8px;
+$a: -$gap;
+$b: +$gap;
+$c: not false;
+$d: 1 < 2;
+.case-assignment-operands {
+	minus: $a;
+	plus: $b;
+	negated: $c;
+	comparison: $d;
+}
+
+$gap: 8px;
+@function identity($x) {
+	@return $x;
+}
+.case-call-operands {
+	minus: identity(-$gap);
+	plus: identity(+$gap);
+	negated: identity(not false);
+	comparison: identity(1 < 2);
+}
+
+```
