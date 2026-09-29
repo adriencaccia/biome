@@ -1,6 +1,5 @@
 ---
 source: crates/biome_formatter_test/src/snapshot_builder.rs
-assertion_line: 249
 info: scss/expression/parity-core-list-operands.scss
 ---
 
@@ -24,6 +23,10 @@ $config: (offsets: $offsets);
   items: list.length($flags);
   from-map: list.nth(map.get($config, offsets), 1);
 }
+
+$x:[not false]; .case-bracket-not-singleton { value:list.nth($x,1); length:list.length($x); separator:list.separator($x); bracketed:list.is-bracketed($x); }
+
+$x:[1 < 2]; .case-bracket-comparison-singleton { value:list.nth($x,1); length:list.length($x); separator:list.separator($x); bracketed:list.is-bracketed($x); }
 
 ```
 
@@ -49,6 +52,22 @@ $config: (
 	bracketed: list.is-bracketed($offsets);
 	items: list.length($flags);
 	from-map: list.nth(map.get($config, offsets), 1);
+}
+
+$x: [not false];
+.case-bracket-not-singleton {
+	value: list.nth($x, 1);
+	length: list.length($x);
+	separator: list.separator($x);
+	bracketed: list.is-bracketed($x);
+}
+
+$x: [1 < 2];
+.case-bracket-comparison-singleton {
+	value: list.nth($x, 1);
+	length: list.length($x);
+	separator: list.separator($x);
+	bracketed: list.is-bracketed($x);
 }
 
 ```
