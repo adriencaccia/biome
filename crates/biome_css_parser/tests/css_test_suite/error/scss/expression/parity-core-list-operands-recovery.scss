@@ -1,0 +1,8 @@
+$x: [-$];
+.after-minus { color: red; }
+
+$x: [not $];
+.after-not { color: blue; }
+
+$x: [1 + $];
+.after-binary { color: green; }
