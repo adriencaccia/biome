@@ -1,6 +1,5 @@
 ---
 source: crates/biome_formatter_test/src/snapshot_builder.rs
-assertion_line: 249
 info: scss/expression/parity-core-list-operands-contexts.scss
 ---
 
@@ -30,6 +29,8 @@ $gap: 8px; $x:(minus:-$gap, plus:+$gap, negated:not false, comparison:1 < 2);
 
 $gap: 8px;
 .case-interpolation-operands { minus:#{-$gap}; plus:#{+$gap}; negated:#{not false}; comparison:#{1 < 2}; }
+
+$gap:8px; @function values($x:[-$gap, +$gap, not false, 1 < 2]) { @return $x; } $x:values(); .case-nested-list-default-return { minus:list.nth($x,1); plus:list.nth($x,2); negated:list.nth($x,3); comparison:list.nth($x,4); }
 
 ```
 
@@ -114,6 +115,18 @@ $gap: 8px;
 	plus: #{+$gap};
 	negated: #{not false};
 	comparison: #{1 < 2};
+}
+
+$gap: 8px;
+@function values($x: [-$gap, +$gap, not false, 1 < 2]) {
+	@return $x;
+}
+$x: values();
+.case-nested-list-default-return {
+	minus: list.nth($x, 1);
+	plus: list.nth($x, 2);
+	negated: list.nth($x, 3);
+	comparison: list.nth($x, 4);
 }
 
 ```
