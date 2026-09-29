@@ -2,3 +2,14 @@
 
 $flags:[true==false,foo==foo,false or true,true and not false];
 .identifier-operators{equal:list.nth($flags,1);same:list.nth($flags,2);either:list.nth($flags,3);both:list.nth($flags,4);length:list.length($flags);}
+
+$case:[MiXeD==mixed,MiXeD!=mixed,MiXeD+1];
+.identifier-case{equal:list.nth($case,1);different:list.nth($case,2);added:list.nth($case,3);}
+
+$singleton:[foo/* left */ == /* right */foo,];
+.identifier-singleton{value:list.nth($singleton,1);separator:list.separator($singleton);length:list.length($singleton);}
+
+$slashes:[Start / End];
+.identifier-slashes{value:$slashes;}
+
+.grid{grid-template-columns:[Main Start] 1fr [End];}
