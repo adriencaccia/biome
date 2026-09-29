@@ -30,17 +30,10 @@ impl FormatNodeRule<ScssExpression> for FormatScssExpression {
     fn fmt_fields(&self, node: &ScssExpression, f: &mut CssFormatter) -> FormatResult<()> {
         let ScssExpressionFields { items } = node.as_fields();
 
-        let has_enclosing_expression = node
+        if items
             .syntax()
-            .ancestors()
-            .skip(1)
-            .any(|ancestor| ScssExpression::can_cast(ancestor.kind()));
-
-        if !has_enclosing_expression
-            && items
-                .syntax()
-                .descendants()
-                .any(|descendant| CssBogusPropertyValue::can_cast(descendant.kind()))
+            .descendants()
+            .any(|descendant| CssBogusPropertyValue::can_cast(descendant.kind()))
         {
             // Recovery can split opaque syntax like `progid:...(...,...)` into list items.
             return write!(f, [format_bogus_node(items.syntax())]);
@@ -70,4 +63,39 @@ fn is_function_argument_with_leading_comments(node: &ScssExpression, f: &CssForm
                 .is_some_and(|value| value.as_any_css_function().is_some())
         })
         && !is_in_scss_include_arguments(node.syntax())
+}
+
+#[cfg(test)]
+mod tests {
+    use biome_css_parser::{CssParserOptions, parse_css};
+    use biome_css_syntax::ScssExpression;
+    use biome_languages::CssFileSource;
+    use biome_rowan::AstNode;
+
+    use crate::{context::CssFormatOptions, format_sub_tree};
+
+    #[test]
+    fn recovered_filter_subtree_preserves_opaque_syntax() {
+        let source = ".legacy { filter: progid:DXImageTransform.Microsoft.gradient(enabled='false',startColorstr='#fff',endColorstr='#000'); }";
+        let selected = "progid:DXImageTransform.Microsoft.gradient(enabled='false'";
+        let parsed = parse_css(source, CssFileSource::scss(), CssParserOptions::default());
+        let expression = parsed
+            .syntax()
+            .descendants()
+            .filter_map(ScssExpression::cast)
+            .find(|node| node.syntax().text_trimmed() == selected)
+            .expect("recovered inner expression");
+
+        let printed = format_sub_tree(
+            CssFormatOptions::new(CssFileSource::scss()),
+            expression.syntax(),
+        )
+        .unwrap();
+
+        assert_eq!(printed.as_code().trim(), selected);
+        assert_eq!(
+            printed.range(),
+            Some(expression.syntax().text_trimmed_range())
+        );
+    }
 }
