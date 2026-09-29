@@ -31,6 +31,12 @@ $x:[true aNd false,false oR true];
 $x:[not false,true and not false,false or true];
 .lowercase-operators{length:list.length($x);value:meta.inspect($x);}
 
+$x:[n\6f t false,\6e ot false,true a\6e d false,false o\72  true];
+.escaped-operators{length:list.length($x);value:meta.inspect($x);}
+
+$x:[N\4f T false,true \61 nd false,false \6f r true];
+.escaped-identifiers{length:list.length($x);value:meta.inspect($x);}
+
 ```
 
 
@@ -78,6 +84,18 @@ $x: [true aNd false, false oR true];
 
 $x: [not false, true and not false, false or true];
 .lowercase-operators {
+	length: list.length($x);
+	value: meta.inspect($x);
+}
+
+$x: [n\6f t false, \6e ot false, true a\6e d false, false o\72  true];
+.escaped-operators {
+	length: list.length($x);
+	value: meta.inspect($x);
+}
+
+$x: [N\4f T false, true \61 nd false, false \6f r true];
+.escaped-identifiers {
 	length: list.length($x);
 	value: meta.inspect($x);
 }
