@@ -21,6 +21,10 @@ $x:[a b]; .case-shape-bracket-space { length:list.length($x); separator:list.sep
 
 $x:[a, b]; .case-shape-bracket-comma { length:list.length($x); separator:list.separator($x); bracketed:list.is-bracketed($x); type:meta.type-of($x); value:list.nth($x,1); }
 
+$x:(key: (a, b)); $v:map.get($x,key); .case-shape-map { type:meta.type-of($x); length:list.length($v); separator:list.separator($v); bracketed:list.is-bracketed($v); first:list.nth($v,1); second:list.nth($v,2); }
+
+$x:(1 + 2: arithmetic, not false: boolean); .case-map-expression-keys { numeric:map.get($x,3); boolean:map.get($x,true); }
+
 ```
 
 
@@ -73,6 +77,31 @@ $x: [a, b];
 	bracketed: list.is-bracketed($x);
 	type: meta.type-of($x);
 	value: list.nth($x, 1);
+}
+
+$x: (
+	key: (
+		a,
+		b,
+	),
+);
+$v: map.get($x, key);
+.case-shape-map {
+	type: meta.type-of($x);
+	length: list.length($v);
+	separator: list.separator($v);
+	bracketed: list.is-bracketed($v);
+	first: list.nth($v, 1);
+	second: list.nth($v, 2);
+}
+
+$x: (
+	1 + 2: arithmetic,
+	not false: boolean,
+);
+.case-map-expression-keys {
+	numeric: map.get($x, 3);
+	boolean: map.get($x, true);
 }
 
 ```
