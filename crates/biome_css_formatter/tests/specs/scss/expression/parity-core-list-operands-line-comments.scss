@@ -1,0 +1,16 @@
+@use "sass:list";
+$gap:8px; $x:[
+-$gap, // first item
++$gap, // second item
+not false,
+1 < 2 // final item
+]; .line-comments{minus:list.nth($x,1);plus:list.nth($x,2);negated:list.nth($x,3);comparison:list.nth($x,4);}
+
+$single:[  -$gap // single item
+ ];
+$nested:[ [ -$gap,+$gap // nested item
+ ],not false // outer item
+ ];
+$leading:[ // before first item
+  -$gap, +$gap ];
+$outside:[ -$gap,+$gap ]; // after closing bracket

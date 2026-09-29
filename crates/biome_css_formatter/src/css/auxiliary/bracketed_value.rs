@@ -26,6 +26,7 @@ impl FormatNodeRule<CssBracketedValue> for FormatCssBracketedValue {
                 maybe_space,
                 items.format(),
                 maybe_space,
+                line_suffix_boundary(),
                 r_brack_token.format()
             ]
         )
