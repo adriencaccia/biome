@@ -1,0 +1,20 @@
+@use "sass:list";
+@use "sass:map";
+@use "sass:meta";
+
+$bare:  a  ,;
+$single:( a , );
+$space:( a   b , );
+$nested:(( a , ),);
+$mapped:(key:( a , ),( a , ):( b , ));
+$commented:( /* before */ a /* item */ , /* end */ );
+$empty: ( );
+$scalar: ( a );
+$multiple:( a , b , );
+
+@mixin observe($value:( a , )){.included{type:meta.type-of($value);length:list.length($value);separator:list.separator($value);}}
+@include observe();
+@include observe(( b , ));
+@include observe($value:( c , ));
+
+.singletons{bare:meta.type-of($bare);single:list.separator($single);space:list.separator($space);nested:list.separator(list.nth($nested,1));map-value:list.separator(map.get($mapped,key));map-key:meta.type-of(list.nth(map.keys($mapped),2));commented:list.separator($commented);empty:list.length($empty);scalar:meta.type-of($scalar);multiple:list.length($multiple);}
