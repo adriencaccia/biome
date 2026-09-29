@@ -1,6 +1,5 @@
 ---
 source: crates/biome_formatter_test/src/snapshot_builder.rs
-assertion_line: 249
 info: scss/expression/parity-core-list-operands-keyword-case.scss
 ---
 
@@ -36,6 +35,12 @@ $x:[n\6f t false,\6e ot false,true a\6e d false,false o\72  true];
 
 $x:[N\4f T false,true \61 nd false,false \6f r true];
 .escaped-identifiers{length:list.length($x);value:meta.inspect($x);}
+
+@function identity($value){@return $value;}
+$x:identity((names:[NOT AND OR],logic:[not false AND]));
+.nested-keywords{value:meta.inspect($x);}
+
+.grid{grid-template-columns:[NOT AND OR] 1fr;}
 
 ```
 
@@ -98,6 +103,23 @@ $x: [N\4f T false, true \61 nd false, false \6f r true];
 .escaped-identifiers {
 	length: list.length($x);
 	value: meta.inspect($x);
+}
+
+@function identity($value) {
+	@return $value;
+}
+$x: identity(
+	(
+		names: [NOT AND OR],
+		logic: [not false AND],
+	)
+);
+.nested-keywords {
+	value: meta.inspect($x);
+}
+
+.grid {
+	grid-template-columns: [NOT AND OR] 1fr;
 }
 
 ```
