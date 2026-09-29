@@ -71,8 +71,8 @@ pub(crate) fn parse_scss_bracketed_value_expression_item(p: &mut CssParser) -> P
 #[inline]
 fn is_at_scss_bracketed_value_expression_item(p: &mut CssParser) -> bool {
     // CSS grid line names may use `not` as a custom identifier.
-    let is_unary_expression = (!p.at(T![not]) || CssSyntaxFeatures::Scss.is_supported(p))
-        && is_at_scss_unary_operator(p);
+    let is_unary_expression =
+        (!p.at(T![not]) || CssSyntaxFeatures::Scss.is_supported(p)) && is_at_scss_unary_operator(p);
 
     if p.at(T!['(']) || is_unary_expression {
         return true;
