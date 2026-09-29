@@ -17,6 +17,10 @@ $x:(a); .case-shape-group { length:list.length($x); separator:list.separator($x)
 
 $x:(a,); .case-shape-singleton { length:list.length($x); separator:list.separator($x); bracketed:list.is-bracketed($x); type:meta.type-of($x); value:list.nth($x,1); }
 
+$x:[a b]; .case-shape-bracket-space { length:list.length($x); separator:list.separator($x); bracketed:list.is-bracketed($x); type:meta.type-of($x); value:list.nth($x,1); }
+
+$x:[a, b]; .case-shape-bracket-comma { length:list.length($x); separator:list.separator($x); bracketed:list.is-bracketed($x); type:meta.type-of($x); value:list.nth($x,1); }
+
 ```
 
 
@@ -46,6 +50,24 @@ $x: (a);
 
 $x: (a,);
 .case-shape-singleton {
+	length: list.length($x);
+	separator: list.separator($x);
+	bracketed: list.is-bracketed($x);
+	type: meta.type-of($x);
+	value: list.nth($x, 1);
+}
+
+$x: [a b];
+.case-shape-bracket-space {
+	length: list.length($x);
+	separator: list.separator($x);
+	bracketed: list.is-bracketed($x);
+	type: meta.type-of($x);
+	value: list.nth($x, 1);
+}
+
+$x: [a, b];
+.case-shape-bracket-comma {
 	length: list.length($x);
 	separator: list.separator($x);
 	bracketed: list.is-bracketed($x);
