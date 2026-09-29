@@ -62,8 +62,8 @@ pub(crate) const SCSS_BRACKETED_VALUE_EXPRESSION_END_SET: TokenSet<CssSyntaxKind
 #[inline]
 pub(crate) fn parse_scss_bracketed_value_expression_item(p: &mut CssParser) -> ParsedSyntax {
     // CSS grid line names may use `not` as a custom identifier.
-    let is_unary_expression = (!p.at(T![not]) || CssSyntaxFeatures::Scss.is_supported(p))
-        && is_at_scss_unary_operator(p);
+    let is_unary_expression =
+        (!p.at(T![not]) || CssSyntaxFeatures::Scss.is_supported(p)) && is_at_scss_unary_operator(p);
 
     if !p.at(T!['(']) && !is_unary_expression {
         let context = ValueParsingContext::new(p, ValueParsingMode::ScssAware);
