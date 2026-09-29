@@ -1,0 +1,17 @@
+@use "sass:list";
+@use "sass:map";
+
+$gap: 8px;
+$offsets: [-$gap, +$gap];
+$flags: [not false, 1 < 2];
+$config: (offsets: $offsets);
+
+.case-user-seed {
+  left: list.nth($offsets, 1);
+  right: list.nth($offsets, 2);
+  enabled: list.nth($flags, 1);
+  comparison: list.nth($flags, 2);
+  bracketed: list.is-bracketed($offsets);
+  items: list.length($flags);
+  from-map: list.nth(map.get($config, offsets), 1);
+}

@@ -1,0 +1,22 @@
+---
+source: crates/biome_formatter_test/src/snapshot_builder.rs
+info: scss/expression/parity-core-list-operands-unary-case.scss
+---
+
+# Input
+
+```scss
+.unary-case{flags: [not    false,not FALSE];signs:[+  MiXeD,-   MiXeD];}
+
+```
+
+
+# Formatted
+
+```scss
+.unary-case {
+	flags: [not false, not FALSE];
+	signs: [+MiXeD, -MiXeD];
+}
+
+```

@@ -108,7 +108,7 @@ fn parse_scss_unary_expression(p: &mut CssParser, options: ScssExpressionOptions
 }
 
 #[inline]
-fn is_at_scss_unary_operator(p: &mut CssParser) -> bool {
+pub(crate) fn is_at_scss_unary_operator(p: &mut CssParser) -> bool {
     match p.cur() {
         T![+] => true,
         T![not] => decode_css_identifier(p.cur_text()) == "not",

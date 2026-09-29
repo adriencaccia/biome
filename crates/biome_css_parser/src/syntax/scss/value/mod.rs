@@ -7,7 +7,7 @@ mod parent_selector;
 
 use crate::parser::CssParser;
 use crate::syntax::parse_error::scss_only_syntax_error;
-use crate::syntax::scss::parse_scss_expression_until;
+use crate::syntax::scss::{is_at_scss_unary_operator, parse_scss_expression_until};
 use crate::syntax::value::function::is_at_any_function_with_context;
 use crate::syntax::{
     CssSyntaxFeatures, ValueParsingContext, ValueParsingMode, is_at_any_value_with_context,
@@ -70,7 +70,11 @@ pub(crate) fn parse_scss_bracketed_value_expression_item(p: &mut CssParser) -> P
 
 #[inline]
 fn is_at_scss_bracketed_value_expression_item(p: &mut CssParser) -> bool {
-    if p.at(T!['(']) {
+    // CSS grid line names may use `not` as a custom identifier.
+    let is_unary_expression = (!p.at(T![not]) || CssSyntaxFeatures::Scss.is_supported(p))
+        && is_at_scss_unary_operator(p);
+
+    if p.at(T!['(']) || is_unary_expression {
         return true;
     }
 
