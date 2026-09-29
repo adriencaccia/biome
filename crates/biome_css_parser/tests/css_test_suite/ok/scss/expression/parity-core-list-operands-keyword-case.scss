@@ -9,3 +9,15 @@ $x:[foo AND];
 
 $x:[true OR false];
 .uppercase-or{length:list.length($x);value:meta.inspect($x);}
+
+$x:[not false AND];
+.mixed-operator-tail{length:list.length($x);value:meta.inspect($x);}
+
+$x:[Not false,nOt false,noT false];
+.mixed-case-not{length:list.length($x);value:meta.inspect($x);}
+
+$x:[true aNd false,false oR true];
+.mixed-case-binary{length:list.length($x);value:meta.inspect($x);}
+
+$x:[not false,true and not false,false or true];
+.lowercase-operators{length:list.length($x);value:meta.inspect($x);}
