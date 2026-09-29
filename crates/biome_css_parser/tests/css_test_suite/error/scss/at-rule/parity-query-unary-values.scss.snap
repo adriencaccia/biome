@@ -57,40 +57,30 @@ CssRoot {
                 declarator: CssMediaAtRuleDeclarator {
                     media_token: MEDIA_KW@14..20 "media" [] [Whitespace(" ")],
                     queries: CssMediaQueryList [
-                        CssBogusMediaQuery {
-                            items: [
-                                CssBogus {
-                                    items: [
-                                        L_PAREN@20..21 "(" [] [],
-                                        CssBogus {
-                                            items: [
-                                                CssIdentifier {
-                                                    value_token: IDENT@21..30 "min-width" [] [],
-                                                },
-                                                COLON@30..32 ":" [] [Whitespace(" ")],
-                                                CssBogus {
-                                                    items: [
-                                                        CssBogus {
-                                                            items: [
-                                                                ScssUnaryExpression {
-                                                                    operator: MINUS@32..33 "-" [] [],
-                                                                    expression: missing (required),
-                                                                },
-                                                                CssBogusPropertyValue {
-                                                                    items: [
-                                                                        DOLLAR@33..34 "$" [] [],
-                                                                    ],
-                                                                },
-                                                            ],
-                                                        },
-                                                    ],
-                                                },
-                                            ],
-                                        },
-                                        R_PAREN@34..36 ")" [] [Whitespace(" ")],
-                                    ],
+                        CssMediaConditionQuery {
+                            condition: CssMediaFeatureInParens {
+                                l_paren_token: L_PAREN@20..21 "(" [] [],
+                                feature: CssQueryFeaturePlain {
+                                    name: CssIdentifier {
+                                        value_token: IDENT@21..30 "min-width" [] [],
+                                    },
+                                    colon_token: COLON@30..32 ":" [] [Whitespace(" ")],
+                                    value: ScssExpression {
+                                        items: ScssExpressionItemList [
+                                            ScssUnaryExpression {
+                                                operator: MINUS@32..33 "-" [] [],
+                                                expression: missing (required),
+                                            },
+                                            CssBogusPropertyValue {
+                                                items: [
+                                                    DOLLAR@33..34 "$" [] [],
+                                                ],
+                                            },
+                                        ],
+                                    },
                                 },
-                            ],
+                                r_paren_token: R_PAREN@34..36 ")" [] [Whitespace(" ")],
+                            },
                         },
                     ],
                 },
@@ -468,15 +458,15 @@ CssRoot {
         0: CSS_MEDIA_AT_RULE_DECLARATOR@14..36
           0: MEDIA_KW@14..20 "media" [] [Whitespace(" ")]
           1: CSS_MEDIA_QUERY_LIST@20..36
-            0: CSS_BOGUS_MEDIA_QUERY@20..36
-              0: CSS_BOGUS@20..36
+            0: CSS_MEDIA_CONDITION_QUERY@20..36
+              0: CSS_MEDIA_FEATURE_IN_PARENS@20..36
                 0: L_PAREN@20..21 "(" [] []
-                1: CSS_BOGUS@21..34
+                1: CSS_QUERY_FEATURE_PLAIN@21..34
                   0: CSS_IDENTIFIER@21..30
                     0: IDENT@21..30 "min-width" [] []
                   1: COLON@30..32 ":" [] [Whitespace(" ")]
-                  2: CSS_BOGUS@32..34
-                    0: CSS_BOGUS@32..34
+                  2: SCSS_EXPRESSION@32..34
+                    0: SCSS_EXPRESSION_ITEM_LIST@32..34
                       0: SCSS_UNARY_EXPRESSION@32..33
                         0: MINUS@32..33 "-" [] []
                         1: (empty)
